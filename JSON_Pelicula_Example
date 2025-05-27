@@ -31,3 +31,30 @@
   "tagline": "Roll the dice and unleash the excitement!",
   "title": "Jumanji"
 }
+
+
+
+
+
+
+
+
+
+
+
+{
+  "id": 862,
+  "title": "Toy Story"
+  "original_language": "en",
+  "revenue": 373554033,
+  "belongs_to_collection": {
+    "id": 10194,
+    "name": "Toy Story Collection",
+  },
+  "genres": [
+    {"id": 16, "name": "Animation"},
+    {"id": 35, "name": "Comedy"},
+    {"id": 10751, "name": "Family"}
+  ],
+}
+
