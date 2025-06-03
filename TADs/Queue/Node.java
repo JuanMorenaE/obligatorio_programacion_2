@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.Queue;
+package TADs.Queue;
 
 public class Node <T>{
     T value;

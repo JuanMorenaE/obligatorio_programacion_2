@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.Stack;
+package TADs.Stack;
 
 public class Nodo <T>{
     T data;

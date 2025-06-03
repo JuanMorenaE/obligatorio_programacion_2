@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.Queue;
+package TADs.Queue;
 
 import uy.edu.um.practico3.exceptions.EmptyQueueException;
 

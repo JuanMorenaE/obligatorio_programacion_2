@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.Stack;
+package TADs.Stack;
 import java.util.EmptyStackException;
 
 public class Stack<T> implements MyStack<T> {

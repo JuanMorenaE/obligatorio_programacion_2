@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.LinkedList;
+package TADs.LinkedList;
 
 public class Nodo<T> {
     private T value;

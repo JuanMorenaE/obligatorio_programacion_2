@@ -1,4 +1,4 @@
-package uy.edu.um.practico4.TADs.LinkedList;
+package TADs.LinkedList;
 import uy.edu.um.practico1.tad.Lista;
 
 public class LinkedList<T> implements Lista<T>{
