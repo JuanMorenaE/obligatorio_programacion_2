@@ -5,7 +5,7 @@ public class Director {
     private String nombre;
     private int calificaciones;
     private int cantidadCalificaciones;
-    private int cantidad_peliculas;
+    private int cantidadPeliculas;
 
 
     public Director(int idDirector, String nombre) {
@@ -13,7 +13,7 @@ public class Director {
         this.idDirector = idDirector;
         this.nombre = nombre;
         this.calificaciones = 0;
-        this.cantidad_peliculas = 0;
+        this.cantidadPeliculas = 0;
 
     }
     public int getIdDirector() {
@@ -33,7 +33,7 @@ public class Director {
     }
 
     public void agregarPelicula() {
-        cantidad_peliculas++;
+        cantidadPeliculas++;
     }
 
 

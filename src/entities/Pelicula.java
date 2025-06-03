@@ -2,7 +2,8 @@ package entities;
 
 import TADs.LinkedList.LinkedList;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Pelicula {
     private int id;
@@ -10,7 +11,7 @@ public class Pelicula {
     private LinkedList<Generos> generos;
     private String original_language;
     private String original_title;
-    private Date release_date;
+    private LocalDate release_date;
     private int revenue;
     private int calificacion;
     private int cantidadCalificaciones;
@@ -19,7 +20,7 @@ public class Pelicula {
     private int[] calificacionesMes;
 
 
-    public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, Date release_date, int revenue) {
+    public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, int revenue) {
         this.id = id;
         this.budget = budget;
         this.generos = generos;
@@ -42,10 +43,10 @@ public class Pelicula {
     public LinkedList<Generos> getGeneros() {return generos;}
     public String getOriginal_language() {return original_language;}
     public String getOriginal_title() {return original_title;}
-    public Date getRelease_date() {return release_date;}
+    public LocalDate getRelease_date() {return release_date;}
     public int getRevenue() {return revenue;}
 
-    public void agregarCalificacion(int calificacion, Date fecha) {
+    public void agregarCalificacion(int calificacion, LocalDate fecha) {
 
         //promedio calificaciones
         cantidadCalificaciones++;
@@ -53,7 +54,7 @@ public class Pelicula {
 
         //Sumo una califacion al mes
 
-        int mes= fecha.getMonth();
+        int mes= fecha.getMonthValue()-1;
         calificacionesMes[mes]++;
 
     }
