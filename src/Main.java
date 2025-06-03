@@ -1,10 +1,7 @@
-import utils.DataLoading;
-
-import java.io.*;
-import java.util.Scanner;
+import utils.Files;
 
 public class Main {
     public static void main(String[] args){
-        DataLoading.LoadMovies();
+        Files.LoadMoviesFromCSV();
     }
 }
