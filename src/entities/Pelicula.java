@@ -45,7 +45,7 @@ public class Pelicula {
     public Date getRelease_date() {return release_date;}
     public int getRevenue() {return revenue;}
 
-    private void agregarCalificacion(int calificacion, Date fecha) {
+    public void agregarCalificacion(int calificacion, Date fecha) {
 
         //promedio calificaciones
         cantidad_calificaciones++;
@@ -58,12 +58,12 @@ public class Pelicula {
 
     }
 
-    private void setDirector(Director director) {
+    public void setDirector(Director director) {
         //seteo director
         this.director = director;
     }
 
-    private void agregarActor(Actores actor) {
+    public void agregarActor(Actores actor) {
         if (cantidad_calificaciones != 0) {
             actor.agregarCalificacion(calificacion);
         }
@@ -71,7 +71,7 @@ public class Pelicula {
         actores.add(actor);
     }
 
-    private void agregarDirector(Director directorNew) {
+    public void agregarDirector(Director directorNew) {
         if (cantidad_calificaciones != 0) {
             directorNew.agregarCalificacion(calificacion);
         }
