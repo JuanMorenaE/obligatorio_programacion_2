@@ -13,10 +13,10 @@ public class Pelicula {
     private Date release_date;
     private int revenue;
     private int calificacion;
-    private int cantidad_calificaciones;
+    private int cantidadCalificaciones;
     private Director director;
     private LinkedList<Actores> actores;
-    private int[] calificaciones_mes;
+    private int[] calificacionesMes;
 
 
     public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, Date release_date, int revenue) {
@@ -28,11 +28,11 @@ public class Pelicula {
         this.release_date = release_date;
         this.revenue = revenue;
         this.generos = generos;
-        this.cantidad_calificaciones = 0;
+        this.cantidadCalificaciones = 0;
         this.calificacion = 0;
         this.director = null;
         this.actores = new LinkedList<>();
-        this.calificaciones_mes = new int[12];
+        this.calificacionesMes = new int[12];
 
     }
 
@@ -48,13 +48,13 @@ public class Pelicula {
     public void agregarCalificacion(int calificacion, Date fecha) {
 
         //promedio calificaciones
-        cantidad_calificaciones++;
-        this.calificacion = (this.calificacion *cantidad_calificaciones + calificacion)/cantidad_calificaciones;
+        cantidadCalificaciones++;
+        this.calificacion = (this.calificacion * cantidadCalificaciones + calificacion)/ cantidadCalificaciones;
 
         //Sumo una califacion al mes
 
         int mes= fecha.getMonth();
-        calificaciones_mes[mes]++;
+        calificacionesMes[mes]++;
 
     }
 
@@ -64,15 +64,15 @@ public class Pelicula {
     }
 
     public void agregarActor(Actores actor) {
-        if (cantidad_calificaciones != 0) {
+        if (cantidadCalificaciones != 0) {
             actor.agregarCalificacion(calificacion);
         }
-        actor.visitasMes(calificaciones_mes);
+        actor.visitasMes(calificacionesMes);
         actores.add(actor);
     }
 
     public void agregarDirector(Director directorNew) {
-        if (cantidad_calificaciones != 0) {
+        if (cantidadCalificaciones != 0) {
             directorNew.agregarCalificacion(calificacion);
         }
         directorNew.agregarPelicula();
