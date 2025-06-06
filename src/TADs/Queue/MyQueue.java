@@ -1,6 +1,6 @@
 package TADs.Queue;
 
-import uy.edu.um.practico3.exceptions.EmptyQueueException;
+import TADs.exceptions.EmptyQueueException;
 
 public interface MyQueue <T> {
     void enqueue (T element);

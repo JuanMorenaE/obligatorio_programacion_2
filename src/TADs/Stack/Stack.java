@@ -2,14 +2,14 @@ package TADs.Stack;
 import java.util.EmptyStackException;
 
 public class Stack<T> implements MyStack<T> {
-    Nodo<T> top;
+    StackNode<T> top;
     int size;
 
     public void pop() throws EmptyStackException {
         if(isEmpty())
             throw new EmptyStackException();
 
-        Nodo<T> next = top.getNext();
+        StackNode<T> next = top.getNext();
         top.setData(null);
         top = next;
         size--;
@@ -23,7 +23,7 @@ public class Stack<T> implements MyStack<T> {
     }
 
     public void push(T element) {
-        Nodo<T> node = new Nodo<>(element);
+        StackNode<T> node = new StackNode<>(element);
         node.setNext(top);
         top = node;
         size++;
@@ -35,7 +35,7 @@ public class Stack<T> implements MyStack<T> {
 
     public void makeEmpty() {
         while(top != null){
-            Nodo<T> nextNode = top.getNext();
+            StackNode<T> nextNode = top.getNext();
             top.setData(null);
             top = nextNode;
             size--;
