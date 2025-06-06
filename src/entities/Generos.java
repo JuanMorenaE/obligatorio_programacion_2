@@ -1,6 +1,6 @@
 package entities;
 
-public class Generos {
+public class Generos implements Comparable<Generos> {
     private int id;
     private String nombre;
     private int visitas;
@@ -18,4 +18,14 @@ public class Generos {
 
     public void agregarVisita(){visitas++;}
 
+    @Override
+    public int compareTo(Generos o) {
+        if (id>o.id) {
+            return 1;
+        }
+        else if (id<o.id) {
+            return -1;
+        }
+        return 0;
+    }
 }

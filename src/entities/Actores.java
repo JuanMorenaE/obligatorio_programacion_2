@@ -1,6 +1,6 @@
 package entities;
 
-public class Actores {
+public class Actores implements Comparable<Actores> {
     private int id;
     private String nombre;
     private int calificaciones;
@@ -41,4 +41,14 @@ public class Actores {
     }
 
 
+    @Override
+    public int compareTo(Actores o) {
+        if (id > o.id) {
+            return 1;
+        }
+        if (id < o.id) {
+            return -1;
+        }
+        return 0;
+    }
 }
