@@ -5,7 +5,7 @@ import TADs.LinkedList.LinkedList;
 import java.time.LocalDate;
 
 
-public class Pelicula {
+public class Pelicula implements Comparable<Pelicula>{
     private int id;
     private int budget;
     private LinkedList<Generos> generos;
@@ -18,9 +18,11 @@ public class Pelicula {
     private Director director;
     private LinkedList<Actores> actores;
     private int[] calificacionesMes;
+    private int collectionId;
+    private String collectionName;
 
 
-    public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, int revenue) {
+    public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, int revenue, int collectionId, String collectionName) {
         this.id = id;
         this.budget = budget;
         this.generos = generos;
@@ -28,12 +30,13 @@ public class Pelicula {
         this.original_title = original_title;
         this.release_date = release_date;
         this.revenue = revenue;
-        this.generos = generos;
         this.cantidadCalificaciones = 0;
         this.calificacion = 0;
         this.director = null;
         this.actores = new LinkedList<>();
         this.calificacionesMes = new int[12];
+        this.collectionId = collectionId;
+        this.collectionName = collectionName;
 
     }
 
@@ -45,6 +48,12 @@ public class Pelicula {
     public String getOriginal_title() {return original_title;}
     public LocalDate getRelease_date() {return release_date;}
     public int getRevenue() {return revenue;}
+    public int getCalificacion() {return calificacion;}
+    public int getCantidadCalificaciones() {return cantidadCalificaciones;}
+    public Director getDirector() {return director;}
+    public LinkedList<Actores> getActores() {return actores;}
+    public int[] getCalificacionesMes() {return calificacionesMes;}
+    public int getCollectionId() {return collectionId;}
 
     public void agregarCalificacion(int calificacion, LocalDate fecha) {
 
@@ -81,9 +90,14 @@ public class Pelicula {
     }
 
 
-
-
-
-
-
+    @Override
+    public int compareTo(Pelicula o) {
+        if (o.id < this.id) {
+            return 1;
+        }
+        if (o.id > this.id) {
+            return -1;
+        }
+        return 0;
+    }
 }
