@@ -1,7 +1,7 @@
 package TADs.Queue;
 
-import uy.edu.um.practico3.exceptions.EmptyQueueException;
-import uy.edu.um.practico3.interfaces.MyQueue;
+
+import TADs.exceptions.EmptyQueueException;
 
 public class QueueChainedList<T> implements MyQueue<T> {
     Node<T> first;

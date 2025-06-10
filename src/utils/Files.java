@@ -23,9 +23,9 @@ public class Files {
                 int collectionId = (Integer) collection.get("id");
                 String collectionName = (String) collection.get("name");
 
-                JSONObject genres = new JSONObject(line[3]);
-                int genreId = (Integer) collection.get("id");
-                String genreName = (String) collection.get("name");
+                //JSONObject genres = new JSONObject(line[3]);
+                //int genreId = (Integer) collection.get("id");
+                //String genreName = (String) collection.get("name");
 
                 int budget = Integer.parseInt(line[2]);
                 String language = line[7];

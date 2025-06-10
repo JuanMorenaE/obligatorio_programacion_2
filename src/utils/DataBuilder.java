@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class DataBuilder {
     public static void AddMovie(int id, int collectionId, String collectionName, int budget, String language, String title, LocalDate releaseDate, int revenue){
-        Pelicula p = new Pelicula(id,budget, generos, language, title, releaseDate, revenue, collectionId, collectionName);
+        Pelicula p = new Pelicula(id,budget, null, language, title, releaseDate, revenue, collectionId, collectionName);//va si generos
         UMovie.insertarPeliculas(p);
 
     }
