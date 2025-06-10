@@ -2,10 +2,10 @@ package TADs.Hash;
 
 import TADs.exceptions.ElementoYaExisteException;
 
-public class HashLinear implements HashTable{
+public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> implements HashTable<K, T>{
     final float LOAD_THRESHOLD = 0.75f;
 
-    private HashItem[] hashmap;
+    private HashItem<K, T>[] hashmap;
     private int elements;
 
     public HashLinear(int size) {
@@ -16,12 +16,12 @@ public class HashLinear implements HashTable{
     }
 
     @Override
-    public void insertar(String clave, Object valor) throws ElementoYaExisteException {
+    public void add(K key, T value) throws ElementoYaExisteException {
         if(loadFactor() > LOAD_THRESHOLD)
             restructureHash();
 
-        HashItem item = new HashItem(clave, valor);
-        int hash = getHashCode(item.key);
+        HashItem<K, T> item = new HashItem<>(key, value);
+        int hash = getHashCode(item.getKey());
 
         if(hashmap[hash] == null){
             hashmap[hash] = item;
@@ -29,12 +29,12 @@ public class HashLinear implements HashTable{
             return;
         }
 
-        if(hashmap[hash].key.equals(item.key))
+        if(hashmap[hash].getKey().equals(item.getKey()))
             throw new ElementoYaExisteException();
 
         int j = 1;
         while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null){
-            if(hashmap[(hash + j) % hashmap.length].key.equals(item.key))
+            if(hashmap[(hash + j) % hashmap.length].getKey().equals(item.getKey()))
                 throw new ElementoYaExisteException();
             j++;
         }
@@ -46,60 +46,77 @@ public class HashLinear implements HashTable{
     }
 
     @Override
-    public boolean pertenece(String clave) {
-        int hash = getHashCode(clave);
+    public boolean contains(K key) {
+        int hash = getHashCode(key);
 
         if(hashmap[hash] == null)
             return false;
 
-        if(hashmap[hash].key.equals(clave))
+        if(hashmap[hash].getKey().equals(key))
             return true;
 
         int j = 1;
         while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null)
-            if(hashmap[(hash + j) % hashmap.length].key.equals(clave))
+            if(hashmap[(hash + j) % hashmap.length].getKey().equals(key))
                 return true;
 
         return false;
     }
 
+    public T get(K key){
+        int hash = getHashCode(key);
+
+        if(hashmap[hash] == null)
+            return null;
+
+        if(hashmap[hash].getKey().equals(key))
+            return hashmap[hash].getValue();
+
+        int j = 1;
+        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null)
+            if(hashmap[(hash + j * j) % hashmap.length].getKey().equals(key))
+                return hashmap[(hash + j * j) % hashmap.length].getValue();
+
+        return null;
+    }
+
     @Override
-    public void borrar(String clave) {
-        int hash = getHashCode(clave);
+    public void remove(K key) {
+        int hash = getHashCode(key);
 
         if(hashmap[hash] == null)
             return;
 
-        if(hashmap[hash].key.equals(clave)){
+        if(hashmap[hash].getKey().equals(key)){
             hashmap[hash] = null;
             return;
         }
 
         int j = 1;
         while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null){
-            if(hashmap[(hash + j) % hashmap.length].key.equals(clave)){
+            if(hashmap[(hash + j) % hashmap.length].getKey().equals(key)){
                 hashmap[hash] = null;
                 return;
             }
         }
     }
 
-    public HashItem[] getHashmap() {
+    public HashItem<K, T>[] getHashmap() {
         return hashmap;
     }
 
-    public void setHashmap(HashItem[] hashmap) {
+    public void setHashmap(HashItem<K, T>[] hashmap) {
         this.hashmap = hashmap;
     }
 
     private void restructureHash(){
         int newSize = getNextPrimeNumber(hashmap.length * 2);
         elements = 0;
-        HashItem[] oldHash = getHashmap();
+        HashItem<K, T>[] oldHash = getHashmap();
         setHashmap(new HashItem[newSize]);
 
-        for (HashItem hash : oldHash) {
-            insertar(hash.key, hash.value);
+        for (HashItem<K, T> hash : oldHash) {
+            add(hash.getKey(), hash.getValue());
         }
     }
 
@@ -130,5 +147,9 @@ public class HashLinear implements HashTable{
 
     private float loadFactor(){
         return (float) elements / hashmap.length;
+    }
+
+    private int getHashCode(K key){
+        return key.hashCode() % hashmap.length;
     }
 }
