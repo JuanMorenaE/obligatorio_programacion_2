@@ -8,8 +8,8 @@ import TADs.LinkedList.LinkedList;
 import java.util.Hashtable;
 
 public class UMovie {
-    public static HashLinear peliculas=new HashLinear(10000);
-    public static HashLinear colecciones= new HashLinear(10000);
+    public static HashLinear<Integer, Pelicula> peliculas=new HashLinear(10000);
+    public static HashLinear<Integer, Coleccion> colecciones= new HashLinear(10000);
     public static HashLinear actores= new HashLinear(10000);
     public static HashLinear directores= new HashLinear(10000);
     public static HashLinear ratings= new HashLinear(10000);
@@ -20,35 +20,43 @@ public class UMovie {
     public static void  insertarPeliculas(Pelicula p) {
         Coleccion c;
         if (p.getCollectionId() != -1) { //pertenece a una coleccion
-         if (colecciones.pertenece(Integer.toString(p.getCollectionId()))){  //la coleccion esta en la lista de colecciones
-             colecciones.get().insertarPeliculas(p);
-             c= colecciones.get();
-         }
-         else{
+
+            c= colecciones.get(p.getCollectionId());
+            if (c!= null){  //la coleccion esta en la lista de colecciones
+             c.insertarPeliculas(p);
+            }
+
+            else{
              c= new Coleccion(p.getCollectionId(), p.getCollectionName());  //la coleccion no esta en la lista de colecciones
              c.insertarPeliculas(p);
-             colecciones.insertar(Integer.toString(p.getCollectionId()), c);
-         }
+             colecciones.add(p.getCollectionId(), c);
+}
         }
         else{ //pelicula individual
             c= new Coleccion(p.getId(), p.getOriginal_title());
             c.insertarPeliculas(p);
-            colecciones.insertar(Integer.toString(p.getId()), c);
+            colecciones.add(p.getId(), c);
         }
         //ejercicio 3
 
         int ingresos= c.getIngresos();
-
-        peliculas.insertar(Integer.toString(p.getId()), p);
+        peliculas.add(p.getId(), p);
         if(tres.getSize()>=10){
-            if (ingresos> tres.get(10).getIngresos()){
-                tres.addInOrder(colecciones.get());
+            if (ingresos> tres.get(9).getIngresos()){
+                tres.addInOrder(c);
             }
         }
         else {
-            tres.addInOrder(colecciones.get());
+            tres.addInOrder(c);
         }
+    }
 
+    public void Consulta3(){
+        Coleccion c;
+        for (int i = 0; i < 10; i++) {
+            c= colecciones.get(i);
+            System.out.println(c.getId()+", "+c.getNombre()+", "+c.getCantidadPeliculas()+", "+c.getPeliculas()+", "+c.getIngresos());
+        }
 
     }
 
