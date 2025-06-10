@@ -3,7 +3,7 @@ package entities;
 import TADs.LinkedList.LinkedList;
 import TADs.List.List;
 
-public class Coleccion {
+public class Coleccion implements Comparable<Coleccion> {
     private int id;
     private String nombre;
     private int CantidadPeliculas;
@@ -47,4 +47,15 @@ public class Coleccion {
         return nombre;
     }
 
+
+    @Override
+    public int compareTo(Coleccion o) {
+        if(o.getIngresos() < this.getIngresos()) {
+            return 1;
+        }
+        if(o.getIngresos() > this.getIngresos()) {
+            return -1;
+        }
+        return 0;
+    }
 }

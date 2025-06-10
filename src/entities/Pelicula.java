@@ -54,6 +54,7 @@ public class Pelicula implements Comparable<Pelicula>{
     public LinkedList<Actores> getActores() {return actores;}
     public int[] getCalificacionesMes() {return calificacionesMes;}
     public int getCollectionId() {return collectionId;}
+    public String getCollectionName() {return collectionName;}
 
     public void agregarCalificacion(int calificacion, LocalDate fecha) {
 
