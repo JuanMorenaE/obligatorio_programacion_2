@@ -2,8 +2,8 @@ package TADs.Hash;
 
 import TADs.exceptions.ElementoYaExisteException;
 
-public interface HashTable {
-    public void insertar (String clave, Object valor) throws ElementoYaExisteException;
-    public boolean pertenece (String clave);
-    public void borrar (String clave);
+public interface HashTable<K extends Comparable<K>, T extends Comparable<T>> {
+    public void add (K clave, T valor) throws ElementoYaExisteException;
+    public boolean contains (K clave);
+    public void remove (K clave);
 }
