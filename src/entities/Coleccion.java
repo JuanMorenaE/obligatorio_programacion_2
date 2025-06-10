@@ -8,7 +8,7 @@ public class Coleccion implements Comparable<Coleccion> {
     private String nombre;
     private int CantidadPeliculas;
     private LinkedList<Pelicula> peliculas;
-    private int ingresos;
+    private long ingresos;
 
     public Coleccion(int id, String nombre) {
         this.peliculas= new LinkedList<Pelicula>();
@@ -33,7 +33,7 @@ public class Coleccion implements Comparable<Coleccion> {
     }
 
 
-    public int getIngresos() {
+    public long getIngresos() {
         return ingresos;
     }
 

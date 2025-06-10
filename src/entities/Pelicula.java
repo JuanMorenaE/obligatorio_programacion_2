@@ -7,12 +7,12 @@ import java.time.LocalDate;
 
 public class Pelicula implements Comparable<Pelicula>{
     private int id;
-    private int budget;
+    private long budget;
     private LinkedList<Generos> generos;
     private String original_language;
     private String original_title;
     private LocalDate release_date;
-    private int revenue;
+    private long revenue;
     private int calificacion;
     private int cantidadCalificaciones;
     private Director director;
@@ -22,7 +22,7 @@ public class Pelicula implements Comparable<Pelicula>{
     private String collectionName;
 
 
-    public Pelicula(int id, int budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, int revenue, int collectionId, String collectionName) {
+    public Pelicula(int id, long budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, long revenue, int collectionId, String collectionName) {
         this.id = id;
         this.budget = budget;
         this.generos = generos;
@@ -42,12 +42,12 @@ public class Pelicula implements Comparable<Pelicula>{
 
 
     public int getId() {return id;}
-    public int getBudget() {return budget;}
+    public long getBudget() {return budget;}
     public LinkedList<Generos> getGeneros() {return generos;}
     public String getOriginal_language() {return original_language;}
     public String getOriginal_title() {return original_title;}
     public LocalDate getRelease_date() {return release_date;}
-    public int getRevenue() {return revenue;}
+    public long getRevenue() {return revenue;}
     public int getCalificacion() {return calificacion;}
     public int getCantidadCalificaciones() {return cantidadCalificaciones;}
     public Director getDirector() {return director;}

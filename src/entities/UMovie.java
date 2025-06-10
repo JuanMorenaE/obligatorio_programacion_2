@@ -39,7 +39,7 @@ public class UMovie {
         }
         //ejercicio 3
 
-        int ingresos= c.getIngresos();
+        long ingresos= c.getIngresos();
         peliculas.add(p.getId(), p);
         if(tres.getSize()>=10){
             if (ingresos> tres.get(9).getIngresos()){
@@ -51,7 +51,7 @@ public class UMovie {
         }
     }
 
-    public void Consulta3(){
+    public static void Consulta3(){
         Coleccion c;
         for (int i = 0; i < 10; i++) {
             c= colecciones.get(i);
