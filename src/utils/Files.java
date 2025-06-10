@@ -1,6 +1,7 @@
 package utils;
 
 import com.opencsv.CSVReader;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.FileReader;
@@ -17,21 +18,50 @@ public class Files {
             csv.readNext(); // We skip .csv headers line.
 
             while((line = csv.readNext()) != null){
-                int id = Integer.parseInt(line[5]);
+                int id = -1;
+                try{
+                    id = Integer.parseInt(line[5]);
+                }catch(Exception ex){
 
-                JSONObject collection = new JSONObject(line[1]);
-                int collectionId = (Integer) collection.get("id");
-                String collectionName = (String) collection.get("name");
+                }
 
-                //JSONObject genres = new JSONObject(line[3]);
-                //int genreId = (Integer) collection.get("id");
-                //String genreName = (String) collection.get("name");
 
-                int budget = Integer.parseInt(line[2]);
+                int collectionId = -1;
+                String collectionName = "";
+
+//                if (line[1].trim() != "") {
+//                    JSONObject collection = new JSONObject(line[1]);
+//                    collectionId = (int) collection.get("id");
+//                    collectionName = (String) collection.get("name");
+//                }
+
+//                JSONArray genres = new JSONArray(line[3]);
+
+
+                long budget = -1;
+                try{
+                    budget = Long.parseLong(line[2]);
+                }catch(Exception ex){
+
+                }
+
+
                 String language = line[7];
                 String title = line[8];
-                LocalDate releaseDate = LocalDate.parse(line[12]);
-                int revenue = Integer.parseInt(line[13]);
+                LocalDate releaseDate = null;
+                try{
+                    releaseDate = LocalDate.parse(line[12]);
+                }catch(Exception ex){
+
+                }
+
+                long revenue = -1;
+                try{
+                    revenue = Long.parseLong(line[13]);
+                }catch(Exception ex){
+
+                }
+
 
                 DataBuilder.AddMovie(id, collectionId, collectionName, budget, language, title, releaseDate, revenue);
                 lines++;
@@ -40,7 +70,7 @@ public class Files {
             System.out.println(lines);
         }
         catch (Exception ex){
-            System.out.println("Error ocurred in LoadMovies() : " + ex.getMessage());
+            System.out.println("Error ocurred in LoadMovies() : " + ex);
         }
     }
 
