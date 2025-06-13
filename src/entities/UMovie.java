@@ -3,6 +3,7 @@ package entities;
 import TADs.Hash.HashLinear;
 import TADs.Hash.HashLinkedList;
 import TADs.Hash.HashTree;
+import TADs.Heap.Heap;
 import TADs.LinkedList.LinkedList;
 
 import java.util.Hashtable;
@@ -13,9 +14,18 @@ public class UMovie {
     public static HashLinear actores= new HashLinear(10000);
     public static HashLinear directores= new HashLinear(10000);
     public static HashLinear ratings= new HashLinear(10000);
-    public static HashLinear usuarios= new HashLinear(10000);
-    public static HashLinear generos= new HashLinear(10000);
-    public static LinkedList<Coleccion> tres=  new LinkedList();
+    public static HashLinear<Integer, Usuario> usuarios= new HashLinear(10000);
+    public static HashLinear<Integer, Generos> generos= new HashLinear(10000);
+
+    public static Usuario buscarUsuario(int id){
+        Usuario u= usuarios.get(id);
+        return u;
+    }
+
+    public static Generos buscarGenero(int id){
+        Generos g= generos.get(id);
+        return g;
+    }
 
     public static void  insertarPeliculas(Pelicula p) {
         Coleccion c;
@@ -37,26 +47,41 @@ public class UMovie {
             c.insertarPeliculas(p);
             colecciones.add(p.getId(), c);
         }
-        //ejercicio 3
-
-        long ingresos= c.getIngresos();
-        peliculas.add(p.getId(), p);
-        if(tres.getSize()>=10){
-            if (ingresos> tres.get(9).getIngresos()){
-                tres.addInOrder(c);
-            }
-        }
-        else {
-            tres.addInOrder(c);
-        }
     }
 
-    public static void Consulta3(){
-        Coleccion c;
-        for (int i = 0; i < 10; i++) {
-            c= colecciones.get(i);
-            System.out.println(c.getId()+", "+c.getNombre()+", "+c.getCantidadPeliculas()+", "+c.getPeliculas()+", "+c.getIngresos());
+
+
+    public static void consulta1(Pelicula p){
+        String idioma= p.getOriginal_language();
+
+    }
+
+    public static void insertar_raiting(Ratings r){
+        int IdUsuario= r.getUserId();
+        Usuario u= buscarUsuario(IdUsuario);
+
+        if (u == null){
+            Usuario uNew= new Usuario(IdUsuario);
+            usuarios.add(IdUsuario, uNew);
         }
+
+        int IdPelicula= r.getFilmId();
+        Pelicula p= peliculas.get(IdPelicula);
+        p.agregarCalificacion(r.getRating(),r.getDate());
+        LinkedList<Generos> generosPelicula= p.getGeneros();
+
+        for (int i = 0; i < generosPelicula.getSize(); i++) {
+            Generos g= generosPelicula.get(i);
+            if(u.getGeneroVisto(g.getId())== null){
+                g.setVisitas(0);
+                u.agregarGenero(g);
+            }
+            u.agregarVisita(g.getId());
+            Generos generoGeneral= buscarGenero(g.getId());
+            generoGeneral.agregarVisita();
+
+        }
+
 
     }
 

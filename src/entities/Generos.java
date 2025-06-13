@@ -12,6 +12,10 @@ public class Generos implements Comparable<Generos> {
         this.visitas = 0;
     }
 
+    public void setVisitas(int visitas) {
+        this.visitas = visitas;
+    }
+
     public int getId() {return id;}
     public String getNombre() {return nombre;}
     public int getVisitas() {return visitas;}
