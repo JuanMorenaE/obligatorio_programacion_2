@@ -49,13 +49,6 @@ public class UMovie {
         }
     }
 
-
-
-    public static void consulta1(Pelicula p){
-        String idioma= p.getOriginal_language();
-
-    }
-
     public static void insertar_raiting(Ratings r){
         int IdUsuario= r.getUserId();
         Usuario u= buscarUsuario(IdUsuario);
