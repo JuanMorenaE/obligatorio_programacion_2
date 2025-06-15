@@ -11,66 +11,61 @@ import java.time.ZoneId;
 
 public class Files {
     public static void LoadMoviesFromCSV(){
+        int lines = 1;
+        int strange = 0;
         try(CSVReader csv = new CSVReader(new FileReader("src/datasets/movies_metadata.csv"))){
-            int lines = 0;
 
             String[] line;
             csv.readNext(); // We skip .csv headers line.
 
             while((line = csv.readNext()) != null){
-                int id = -1;
-                try{
-                    id = Integer.parseInt(line[5]);
-                }catch(Exception ex){
+                lines++;
+                if(lines == 9867)
+                    System.out.println();
 
+                if(line.length == 19){
+                    String[] nextLine = csv.peek();
+                    if(nextLine != null && !nextLine[0].equals("FALSE")){
+                        csv.skip(1);
+                        continue;
+                    }
                 }
+                int id = Integer.parseInt(line[5]);
 
 
                 int collectionId = -1;
                 String collectionName = "";
 
-//                if (line[1].trim() != "") {
-//                    JSONObject collection = new JSONObject(line[1]);
-//                    collectionId = (int) collection.get("id");
-//                    collectionName = (String) collection.get("name");
-//                }
+                if(!line[1].isEmpty()){
+                    JSONObject collection = new JSONObject(line[1]);
+                    collectionId = (int) collection.get("id");
+                    collectionName = (String) collection.get("name");
+                }
 
 //                JSONArray genres = new JSONArray(line[3]);
 
 
-                long budget = -1;
-                try{
-                    budget = Long.parseLong(line[2]);
-                }catch(Exception ex){
-
-                }
+                long budget = Long.parseLong(line[2]);
 
 
                 String language = line[7];
                 String title = line[8];
                 LocalDate releaseDate = null;
-                try{
+                if(!line[12].isEmpty())
                     releaseDate = LocalDate.parse(line[12]);
-                }catch(Exception ex){
 
-                }
-
-                long revenue = -1;
-                try{
+                long revenue = 0;
+                if(!line[13].isEmpty())
                     revenue = Long.parseLong(line[13]);
-                }catch(Exception ex){
-
-                }
 
 
                 DataBuilder.AddMovie(id, collectionId, collectionName, budget, language, title, releaseDate, revenue);
-                lines++;
             }
 
             System.out.println(lines);
         }
         catch (Exception ex){
-            System.out.println("Error ocurred in LoadMovies() : " + ex);
+            System.out.println("Error ocurred in LoadMovies() : " + ex + " at line " + lines);
         }
     }
 
