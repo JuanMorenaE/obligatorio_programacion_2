@@ -4,6 +4,7 @@ import TADs.LinkedList.LinkedList;
 import TADs.List.List;
 
 public class Coleccion implements Comparable<Coleccion> {
+
     private int id;
     private String nombre;
     private int CantidadPeliculas;
@@ -24,38 +25,48 @@ public class Coleccion implements Comparable<Coleccion> {
         this.ingresos+= p.getRevenue();
     }
 
-    public LinkedList getPeliculas() {
-        return peliculas;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getCantidadPeliculas() {
         return CantidadPeliculas;
     }
 
+    public void setCantidadPeliculas(int cantidadPeliculas) {
+        CantidadPeliculas = cantidadPeliculas;
+    }
+
+    public LinkedList<Pelicula> getPeliculas() {
+        return peliculas;
+    }
+
+    public void setPeliculas(LinkedList<Pelicula> peliculas) {
+        this.peliculas = peliculas;
+    }
 
     public long getIngresos() {
         return ingresos;
     }
 
-
-    public int getId() {
-        return id;
+    public void setIngresos(long ingresos) {
+        this.ingresos = ingresos;
     }
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
 
     @Override
     public int compareTo(Coleccion o) {
-        if(o.getIngresos() < this.getIngresos()) {
-            return 1;
-        }
-        if(o.getIngresos() > this.getIngresos()) {
-            return -1;
-        }
-        return 0;
+        return Long.compare(getIngresos(), o.getIngresos());
     }
 }

@@ -56,9 +56,11 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
             return true;
 
         int j = 1;
-        while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null)
+        while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null){
             if(hashmap[(hash + j) % hashmap.length].getKey().equals(key))
                 return true;
+            j++;
+        }
 
         return false;
     }
@@ -73,9 +75,11 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
             return hashmap[hash].getValue();
 
         int j = 1;
-        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null)
-            if(hashmap[(hash + j * j) % hashmap.length].getKey().equals(key))
-                return hashmap[(hash + j * j) % hashmap.length].getValue();
+        while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null){
+            if(hashmap[(hash + j) % hashmap.length].getKey().equals(key))
+                return hashmap[(hash + j) % hashmap.length].getValue();
+            j++;
+        }
 
         return null;
     }
@@ -98,6 +102,7 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
                 hashmap[hash] = null;
                 return;
             }
+            j++;
         }
     }
 
@@ -116,6 +121,8 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
         setHashmap(new HashItem[newSize]);
 
         for (HashItem<K, T> hash : oldHash) {
+            if(hash == null)
+                continue;
             add(hash.getKey(), hash.getValue());
         }
     }

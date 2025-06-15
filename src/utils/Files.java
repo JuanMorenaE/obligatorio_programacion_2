@@ -1,6 +1,7 @@
 package utils;
 
 import com.opencsv.CSVReader;
+import entities.UMovie;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,21 +9,24 @@ import java.io.FileReader;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 
 public class Files {
     public static void LoadMoviesFromCSV(){
-        int lines = 1;
-        int strange = 0;
+        int currentLine = 1;
+        int movies = 0;
         try(CSVReader csv = new CSVReader(new FileReader("src/datasets/movies_metadata.csv"))){
 
             String[] line;
-            csv.readNext(); // We skip .csv headers line.
+            csv.readNext(); // Skipeamos el header del dataset.
+
+            long startTime = System.nanoTime();
+            System.out.println("\n[ 🕑 ] Starting LoadMoviesFromCSV() process.");
 
             while((line = csv.readNext()) != null){
-                lines++;
-                if(lines == 9867)
-                    System.out.println();
+                currentLine++;
 
+                // Nos salteamos aquellas lineas "rotas" del dataset.
                 if(line.length == 19){
                     String[] nextLine = csv.peek();
                     if(nextLine != null && !nextLine[0].equals("FALSE")){
@@ -30,26 +34,32 @@ public class Files {
                         continue;
                     }
                 }
+
                 int id = Integer.parseInt(line[5]);
 
-
+                // Coleccion
                 int collectionId = -1;
                 String collectionName = "";
-
                 if(!line[1].isEmpty()){
-                    JSONObject collection = new JSONObject(line[1]);
-                    collectionId = (int) collection.get("id");
-                    collectionName = (String) collection.get("name");
+                    JSONObject collectionJSON = new JSONObject(line[1]);
+                    collectionId = (int) collectionJSON.get("id");
+                    collectionName = (String) collectionJSON.get("name");
                 }
 
-//                JSONArray genres = new JSONArray(line[3]);
-
+                // Generos
+                JSONArray genresJSON = new JSONArray(line[3]);
+                ArrayList<Integer> genres = new ArrayList<>();
+                for (int i = 0; i < genresJSON.length(); i++) {
+                    String genreName = genresJSON.getJSONObject(i).getString("name");
+                    int genreId = genresJSON.getJSONObject(i).getInt("id");
+                    genres.add(genreId);
+                    DataBuilder.AddGenre(genreId, genreName);
+                }
 
                 long budget = Long.parseLong(line[2]);
-
-
                 String language = line[7];
                 String title = line[8];
+
                 LocalDate releaseDate = null;
                 if(!line[12].isEmpty())
                     releaseDate = LocalDate.parse(line[12]);
@@ -58,61 +68,76 @@ public class Files {
                 if(!line[13].isEmpty())
                     revenue = Long.parseLong(line[13]);
 
-
-                DataBuilder.AddMovie(id, collectionId, collectionName, budget, language, title, releaseDate, revenue);
+                DataBuilder.AddMovie(id, collectionId, collectionName, budget, language, title, releaseDate, revenue, genres);
+                movies++;
             }
 
-            System.out.println(lines);
+            // Dejamos un log del tiempo que se tomo en cargar las peliculas.
+            double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+            System.out.println("[ ✅ ] Finish LoadMoviesFromCSV() process in: " + String.format("%.2f", estimatedTime) + " seconds. \n[ -> ] Total movies: " + movies);
         }
         catch (Exception ex){
-            System.out.println("Error ocurred in LoadMovies() : " + ex + " at line " + lines);
+            System.out.println("[ ❌ ] Error ocurred in LoadMoviesFromCSV() : " + ex + " at line " + currentLine);
         }
     }
 
     public static void LoadCreditsFromCSV(){
+        int currentLine = 1;
         try(CSVReader csv = new CSVReader(new FileReader("src/datasets/credits.csv"))){
-            int lines = 0;
 
             String[] line;
             csv.readNext(); // We skip .csv headers line.
+
+            long startTime = System.nanoTime();
+            System.out.println("[ 🕑 ] Starting LoadCreditsFromCSV() process...");
 
             while((line = csv.readNext()) != null){
 
                 /* Load credits logic here. */
 
-                lines++;
+                currentLine++;
             }
 
-            System.out.println(lines);
+            // Dejamos un log del tiempo que se tomo en cargar los creditos.
+            double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+            System.out.println("[ ✅ ] Finish LoadCreditsFromCSV() process in " + String.format("%.2f", estimatedTime) + "\n[ -> ] Total credits: " + currentLine);
         }
         catch (Exception ex){
-            System.out.println("Error ocurred in LoadCredits() : " + ex.getMessage());
+            System.out.println("[ ❌ ] Error ocurred in LoadCreditsFromCSV() : " + ex + " at line " + currentLine);
         }
     }
 
     public static void LoadRatingsFromCSV(){
+        int currentLine = 1;
+        int ratings = 0;
         try(CSVReader csv = new CSVReader(new FileReader("src/datasets/ratings_1mm.csv"))){
-            int lines = 0;
 
             String[] line;
             csv.readNext(); // We skip .csv headers line.
 
+            long startTime = System.nanoTime();
+            System.out.println("\n[ 🕑 ] Starting LoadRatingsFromCSV() process...");
+
             while((line = csv.readNext()) != null){
+                currentLine++;
+
                 int userId = Integer.parseInt(line[0]);
                 int movieId = Integer.parseInt(line[1]);
-                int rating = Integer.parseInt(line[2]);
+                float rating = Float.parseFloat(line[2]);
 
                 long timestamp = Long.parseLong(line[3]);
                 LocalDate date = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
 
                 DataBuilder.AddRating(userId, movieId, rating, date);
-                lines++;
+                ratings++;
             }
 
-            System.out.println(lines);
+            // Dejamos un log del tiempo que se tomo en cargar las calificaciones.
+            double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+            System.out.println("[ ✅ ] Finish LoadRatingsFromCSV() process in " + String.format("%.2f", estimatedTime) + "\n[ -> ] Total ratings: " + ratings);
         }
         catch (Exception ex){
-            System.out.println("Error ocurred in LoadRatings() : " + ex.getMessage());
+            System.out.println("[ ❌ ] Error ocurred in LoadRatingsFromCSV() : " + ex + " at line " + currentLine);
         }
     }
 }

@@ -1,14 +1,15 @@
 package entities;
 
-public class Actores implements Comparable<Actores> {
+public class Actor implements Comparable<Actor> {
     private int id;
     private String nombre;
     private int calificaciones;
     private int cantidadCalificaciones;
+
     private int[] calificacionesMes;
     private int[] peliculasMes;
 
-    public Actores(int id, String nombre) {
+    public Actor(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
         this.calificaciones = 0;
@@ -40,15 +41,45 @@ public class Actores implements Comparable<Actores> {
         }
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(int calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
+    public int getCantidadCalificaciones() {
+        return cantidadCalificaciones;
+    }
+
+    public void setCantidadCalificaciones(int cantidadCalificaciones) {
+        this.cantidadCalificaciones = cantidadCalificaciones;
+    }
+
+    public int[] getCalificacionesMes() {
+        return calificacionesMes;
+    }
+
+    public void setCalificacionesMes(int[] calificacionesMes) {
+        this.calificacionesMes = calificacionesMes;
+    }
+
+    public void setPeliculasMes(int[] peliculasMes) {
+        this.peliculasMes = peliculasMes;
+    }
+
 
     @Override
-    public int compareTo(Actores o) {
-        if (id > o.id) {
-            return 1;
-        }
-        if (id < o.id) {
-            return -1;
-        }
-        return 0;
+    public int compareTo(Actor o) {
+        return Integer.compare(getId(), o.getId());
     }
 }
