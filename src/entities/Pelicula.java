@@ -8,21 +8,21 @@ import java.time.LocalDate;
 public class Pelicula implements Comparable<Pelicula>{
     private int id;
     private long budget;
-    private LinkedList<Generos> generos;
+    private LinkedList<Genero> generos;
     private String original_language;
     private String original_title;
     private LocalDate release_date;
     private long revenue;
-    private int calificacion;
+    private float calificacion;
     private int cantidadCalificaciones;
     private Director director;
-    private LinkedList<Actores> actores;
+    private LinkedList<Actor> actores;
     private int[] calificacionesMes;
     private int collectionId;
     private String collectionName;
 
 
-    public Pelicula(int id, long budget, LinkedList<Generos> generos, String original_language, String original_title, LocalDate release_date, long revenue, int collectionId, String collectionName) {
+    public Pelicula(int id, long budget, LinkedList<Genero> generos, String original_language, String original_title, LocalDate release_date, long revenue, int collectionId, String collectionName) {
         this.id = id;
         this.budget = budget;
         this.generos = generos;
@@ -43,20 +43,20 @@ public class Pelicula implements Comparable<Pelicula>{
 
     public int getId() {return id;}
     public long getBudget() {return budget;}
-    public LinkedList<Generos> getGeneros() {return generos;}
+    public LinkedList<Genero> getGeneros() {return generos;}
     public String getOriginal_language() {return original_language;}
     public String getOriginal_title() {return original_title;}
     public LocalDate getRelease_date() {return release_date;}
     public long getRevenue() {return revenue;}
-    public int getCalificacion() {return calificacion;}
+    public float getCalificacion() {return calificacion;}
     public int getCantidadCalificaciones() {return cantidadCalificaciones;}
     public Director getDirector() {return director;}
-    public LinkedList<Actores> getActores() {return actores;}
+    public LinkedList<Actor> getActores() {return actores;}
     public int[] getCalificacionesMes() {return calificacionesMes;}
     public int getCollectionId() {return collectionId;}
     public String getCollectionName() {return collectionName;}
 
-    public void agregarCalificacion(int calificacion, LocalDate fecha) {
+    public void agregarCalificacion(float calificacion, LocalDate fecha) {
 
         //promedio calificaciones
         cantidadCalificaciones++;
@@ -74,7 +74,7 @@ public class Pelicula implements Comparable<Pelicula>{
         this.director = director;
     }
 
-    public void agregarActor(Actores actor) {
+    public void agregarActor(Actor actor) {
         if (cantidadCalificaciones != 0) {
             actor.agregarCalificacion(calificacion);
         }
@@ -93,12 +93,6 @@ public class Pelicula implements Comparable<Pelicula>{
 
     @Override
     public int compareTo(Pelicula o) {
-        if (o.id < this.id) {
-            return 1;
-        }
-        if (o.id > this.id) {
-            return -1;
-        }
-        return 0;
+        return Integer.compare(getId(), o.getId());
     }
 }

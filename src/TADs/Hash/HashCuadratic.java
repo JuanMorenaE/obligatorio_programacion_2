@@ -57,9 +57,11 @@ public class HashCuadratic<K extends Comparable<K>, T extends Comparable<T>> imp
             return true;
 
         int j = 1;
-        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null)
+        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null){
             if(hashmap[(hash + j * j) % hashmap.length].getKey().equals(key))
                 return true;
+            j++;
+        }
 
         return false;
     }
@@ -74,9 +76,11 @@ public class HashCuadratic<K extends Comparable<K>, T extends Comparable<T>> imp
             return hashmap[hash].getValue();
 
         int j = 1;
-        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null)
+        while((hash + j * j) % hashmap.length != hash && hashmap[(hash + j * j) % hashmap.length] != null){
             if(hashmap[(hash + j * j) % hashmap.length].getKey().equals(key))
                 return hashmap[(hash + j * j) % hashmap.length].getValue();
+            j++;
+        }
 
         return null;
     }
@@ -99,6 +103,7 @@ public class HashCuadratic<K extends Comparable<K>, T extends Comparable<T>> imp
                 hashmap[(hash + j * j) % hashmap.length] = null;
                 return;
             }
+            j++;
         }
     }
 
@@ -117,6 +122,8 @@ public class HashCuadratic<K extends Comparable<K>, T extends Comparable<T>> imp
         setHashmap(new HashItem[newSize]);
 
         for (HashItem<K, T> hash : oldHash) {
+            if(hash == null)
+                continue;
             add(hash.getKey(), hash.getValue());
         }
     }
