@@ -5,6 +5,7 @@ import entities.Genero;
 import entities.Pelicula;
 import entities.Rating;
 import entities.UMovie;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,9 +21,12 @@ public class DataBuilder {
 
     }
 
-    // TODO.
-    public static void AddCredits(){
+    public static void AddActor(int movieId, int actorId, String actorName){
+        throw new NotImplementedException();
+    }
 
+    public static void AddDirector(int movieId, int directorId, String directorName){
+        throw new NotImplementedException();
     }
 
     public static void AddGenre(int id, String name){
@@ -35,6 +39,7 @@ public class DataBuilder {
     }
 
     public static void AddRating(int userId, int movieId, float rating, LocalDate date){
-//        Rating r = new Rating(userId, movieId, rating, date);
+        Rating r = new Rating(userId, movieId, rating, date);
+        throw new NotImplementedException();
     }
 }

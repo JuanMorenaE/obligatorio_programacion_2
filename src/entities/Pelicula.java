@@ -13,7 +13,7 @@ public class Pelicula implements Comparable<Pelicula>{
     private String original_title;
     private LocalDate release_date;
     private long revenue;
-    private int calificacion;
+    private float calificacion;
     private int cantidadCalificaciones;
     private Director director;
     private LinkedList<Actor> actores;
@@ -48,7 +48,7 @@ public class Pelicula implements Comparable<Pelicula>{
     public String getOriginal_title() {return original_title;}
     public LocalDate getRelease_date() {return release_date;}
     public long getRevenue() {return revenue;}
-    public int getCalificacion() {return calificacion;}
+    public float getCalificacion() {return calificacion;}
     public int getCantidadCalificaciones() {return cantidadCalificaciones;}
     public Director getDirector() {return director;}
     public LinkedList<Actor> getActores() {return actores;}
@@ -56,7 +56,7 @@ public class Pelicula implements Comparable<Pelicula>{
     public int getCollectionId() {return collectionId;}
     public String getCollectionName() {return collectionName;}
 
-    public void agregarCalificacion(int calificacion, LocalDate fecha) {
+    public void agregarCalificacion(float calificacion, LocalDate fecha) {
 
         //promedio calificaciones
         cantidadCalificaciones++;

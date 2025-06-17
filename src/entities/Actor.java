@@ -26,7 +26,7 @@ public class Actor implements Comparable<Actor> {
     public int[] getPeliculasMes() {return peliculasMes;}
 
 
-    public void agregarCalificacion(int calificacion) {
+    public void agregarCalificacion(float calificacion) {
         cantidadCalificaciones++;
         calificacion = (calificaciones*cantidadCalificaciones + calificacion)/cantidadCalificaciones;
     }

@@ -23,7 +23,7 @@ public class Director implements Comparable<Director> {
     public String getNombre() {
         return nombre;
     }
-    public void agregarCalificacion(int calificacion) {
+    public void agregarCalificacion(float calificacion) {
         cantidadCalificaciones++;
         calificacion = (calificaciones*cantidadCalificaciones + calificacion)/cantidadCalificaciones;
     }

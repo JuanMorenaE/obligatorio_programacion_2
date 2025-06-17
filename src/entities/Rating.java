@@ -5,10 +5,10 @@ import java.time.LocalDate;
 public class Rating implements Comparable<Rating> {
     private int userId;
     private int filmId;
-    private int rating;
+    private float rating;
     private LocalDate date;
 
-    public Rating(int userId, int filmId, int rating, LocalDate date) {
+    public Rating(int userId, int filmId, float rating, LocalDate date) {
         this.userId = userId;
         this.filmId = filmId;
         this.rating = rating;
@@ -31,11 +31,11 @@ public class Rating implements Comparable<Rating> {
         this.filmId = filmId;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -49,6 +49,6 @@ public class Rating implements Comparable<Rating> {
 
     @Override
     public int compareTo(Rating o) {
-        return Integer.compare(rating, o.rating);
+        return Float.compare(rating, o.rating);
     }
 }
