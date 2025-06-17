@@ -3,12 +3,13 @@ package entities;
 import TADs.LinkedList.LinkedList;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class Pelicula implements Comparable<Pelicula>{
     private int id;
     private long budget;
-    private LinkedList<Genero> generos;
+    private ArrayList<Integer> generos;
     private String original_language;
     private String original_title;
     private LocalDate release_date;
@@ -22,7 +23,7 @@ public class Pelicula implements Comparable<Pelicula>{
     private String collectionName;
 
 
-    public Pelicula(int id, long budget, LinkedList<Genero> generos, String original_language, String original_title, LocalDate release_date, long revenue, int collectionId, String collectionName) {
+    public Pelicula(int id, long budget, ArrayList<Integer> generos, String original_language, String original_title, LocalDate release_date, long revenue, int collectionId, String collectionName) {
         this.id = id;
         this.budget = budget;
         this.generos = generos;
@@ -43,7 +44,7 @@ public class Pelicula implements Comparable<Pelicula>{
 
     public int getId() {return id;}
     public long getBudget() {return budget;}
-    public LinkedList<Genero> getGeneros() {return generos;}
+    public ArrayList<Integer> getGeneros() {return generos;}
     public String getOriginal_language() {return original_language;}
     public String getOriginal_title() {return original_title;}
     public LocalDate getRelease_date() {return release_date;}
@@ -86,6 +87,7 @@ public class Pelicula implements Comparable<Pelicula>{
         if (cantidadCalificaciones != 0) {
             directorNew.agregarCalificacion(calificacion);
         }
+
         directorNew.agregarPelicula();
         setDirector(directorNew);
     }

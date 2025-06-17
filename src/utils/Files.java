@@ -162,7 +162,7 @@ public class Files {
                 long timestamp = Long.parseLong(line[3]);
                 LocalDate date = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
 
-//                DataBuilder.AddRating(userId, movieId, rating, date);
+                DataBuilder.AddRating(userId, movieId, rating, date);
                 ratings++;
             }
 

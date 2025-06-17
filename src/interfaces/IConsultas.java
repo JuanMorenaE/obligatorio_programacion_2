@@ -12,6 +12,9 @@ public interface IConsultas {
             - Total de evaluaciones.
             - Idioma Original
      */
+
+
+
     void Top5PeliculasPorIdiomaMasCalificadas();
 
 

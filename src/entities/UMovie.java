@@ -3,17 +3,22 @@ package entities;
 import TADs.Hash.HashLinear;
 import TADs.LinkedList.LinkedList;
 
+import java.util.ArrayList;
+
 public class UMovie {
     public static HashLinear<Integer, Pelicula> peliculas =new HashLinear<>(45000);
     public static HashLinear<Integer, Coleccion> colecciones = new HashLinear<>(10000);
     public static HashLinear<Integer, Actor> actores = new HashLinear<>(10000);
     public static HashLinear<Integer, Director> directores = new HashLinear<>(10000);
-    public static HashLinear<Integer, Rating> ratings = new HashLinear<>(10000);
     public static HashLinear<Integer, Usuario> usuarios = new HashLinear<>(10000);
     public static HashLinear<Integer, Genero> generos = new HashLinear<>(20);
 
     public static Usuario buscarUsuario(int id){
         return usuarios.get(id);
+    }
+
+    public static Actor buscarActor(int id){
+        return actores.get(id);
     }
 
     public static Genero buscarGenero(int id){
@@ -38,9 +43,55 @@ public class UMovie {
             collection.insertarPeliculas(pelicula);
             colecciones.add(pelicula.getId(), collection);
         }
+        peliculas.add(pelicula.getId(), pelicula);
     }
 
+
+    public static void insertarActores(Actor actor,Integer movieid) {
+        Actor actor1 = buscarActor(actor.getId());
+
+        if (actor1 == null) {
+            actores.add(actor.getId(), actor);
+            actor1 = buscarActor(actor.getId());
+        }
+
+        Pelicula pelicula= peliculas.get(movieid);
+
+        if (pelicula == null) {
+            return;
+        }
+
+        pelicula.agregarActor(actor1);
+
+    }
+
+    public static void insertarDirector(Director director,Integer movieid) {
+        Director director1 = directores.get(director.getId());
+
+        if (director1 == null) {
+            directores.add(director.getId(), director);
+            director1 = directores.get(director.getId());
+        }
+
+        Pelicula pelicula= peliculas.get(movieid);
+        if (pelicula == null) {
+            return;
+        }
+        pelicula.agregarDirector(director1);
+
+
+    }
+
+
+
     public static void insertarRaiting(Rating rating){
+
+        int peliculaId = rating.getFilmId();
+        Pelicula pelicula = peliculas.get(peliculaId);
+        if(pelicula == null){
+            return;
+        }
+
         int userId = rating.getUserId();
         Usuario usuario = buscarUsuario(userId);
 
@@ -49,13 +100,13 @@ public class UMovie {
             usuarios.add(userId, usuario);
         }
 
-        int peliculaId = rating.getFilmId();
-        Pelicula pelicula = peliculas.get(peliculaId);
-        pelicula.agregarCalificacion(rating.getRating(), rating.getDate());
-        LinkedList<Genero> generosPelicula = pelicula.getGeneros();
 
-        for (int i = 0; i < generosPelicula.getSize(); i++) {
-            Genero genero = generosPelicula.get(i);
+        pelicula.agregarCalificacion(rating.getRating(), rating.getDate());
+        ArrayList<Integer> generosPelicula = pelicula.getGeneros();
+
+        for (int i = 0; i < generosPelicula.size(); i++) {
+            Integer generoid = generosPelicula.get(i);
+            Genero genero = generos.get(generoid);
             if(usuario.getGeneroVisto(genero.getId()) == null){
                 genero.setVisitas(0);
                 usuario.agregarGenero(genero);
@@ -65,4 +116,5 @@ public class UMovie {
             generoGeneral.agregarVisita();
         }
     }
+
 }

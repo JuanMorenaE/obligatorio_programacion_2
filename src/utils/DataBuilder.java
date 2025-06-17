@@ -1,10 +1,7 @@
 package utils;
 
 import TADs.exceptions.ElementoYaExisteException;
-import entities.Genero;
-import entities.Pelicula;
-import entities.Rating;
-import entities.UMovie;
+import entities.*;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.time.LocalDate;
@@ -13,7 +10,8 @@ import java.util.ArrayList;
 public class DataBuilder {
     public static void AddMovie(int id, int collectionId, String collectionName, long budget, String language, String title, LocalDate releaseDate, long revenue, ArrayList<Integer> genres){
         try{
-            Pelicula pelicula = new Pelicula(id,budget, null, language, title, releaseDate, revenue, collectionId, collectionName);//va si generos
+
+            Pelicula pelicula = new Pelicula(id,budget, genres, language, title, releaseDate, revenue, collectionId, collectionName);//va si generos
             UMovie.insertarPeliculas(pelicula);
         }catch(ElementoYaExisteException _){
 
@@ -22,11 +20,13 @@ public class DataBuilder {
     }
 
     public static void AddActor(int movieId, int actorId, String actorName){
-        throw new NotImplementedException();
+        Actor actor = new Actor(actorId,actorName);
+        UMovie.insertarActores(actor,movieId);
     }
 
     public static void AddDirector(int movieId, int directorId, String directorName){
-        throw new NotImplementedException();
+        Director director = new Director(directorId,directorName);
+        UMovie.insertarDirector(director,movieId);
     }
 
     public static void AddGenre(int id, String name){
@@ -40,6 +40,8 @@ public class DataBuilder {
 
     public static void AddRating(int userId, int movieId, float rating, LocalDate date){
         Rating r = new Rating(userId, movieId, rating, date);
-        throw new NotImplementedException();
+        UMovie.insertarRaiting(r);
     }
+
+
 }
