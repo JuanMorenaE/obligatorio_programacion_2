@@ -47,22 +47,20 @@ public class UMovie {
     }
 
 
-    public static void insertarActores(Actor actor,Integer movieid) {
-        Actor actor1 = buscarActor(actor.getId());
+    public static void insertarActores(int movieId, int actorId, String actorName) {
+        Actor actor = buscarActor(actorId);
 
-        if (actor1 == null) {
+        if (actor == null) {
+            actor = new Actor(actorId, actorName);
             actores.add(actor.getId(), actor);
-            actor1 = buscarActor(actor.getId());
         }
 
-        Pelicula pelicula= peliculas.get(movieid);
+        Pelicula pelicula= peliculas.get(movieId);
 
-        if (pelicula == null) {
+        if (pelicula == null)
             return;
-        }
 
-        pelicula.agregarActor(actor1);
-
+        pelicula.agregarActor(actor);
     }
 
     public static void insertarDirector(Director director,Integer movieid) {
@@ -86,11 +84,11 @@ public class UMovie {
 
     public static void insertarRaiting(Rating rating){
 
-        int peliculaId = rating.getFilmId();
-        Pelicula pelicula = peliculas.get(peliculaId);
-        if(pelicula == null){
+        int movieId = rating.getMovieId();
+        Pelicula pelicula = peliculas.get(movieId);
+
+        if(pelicula == null)
             return;
-        }
 
         int userId = rating.getUserId();
         Usuario usuario = buscarUsuario(userId);

@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Rating implements Comparable<Rating> {
     private int userId;
-    private int filmId;
+    private int movieId;
     private float rating;
     private LocalDate date;
 
-    public Rating(int userId, int filmId, float rating, LocalDate date) {
+    public Rating(int userId, int movieId, float rating, LocalDate date) {
         this.userId = userId;
-        this.filmId = filmId;
+        this.movieId = movieId;
         this.rating = rating;
         this.date = date;
     }
@@ -23,12 +23,12 @@ public class Rating implements Comparable<Rating> {
         this.userId = userId;
     }
 
-    public int getFilmId() {
-        return filmId;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setFilmId(int filmId) {
-        this.filmId = filmId;
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
     public float getRating() {

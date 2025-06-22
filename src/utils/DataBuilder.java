@@ -20,8 +20,7 @@ public class DataBuilder {
     }
 
     public static void AddActor(int movieId, int actorId, String actorName){
-        Actor actor = new Actor(actorId,actorName);
-        UMovie.insertarActores(actor,movieId);
+        UMovie.insertarActores(movieId, actorId, actorName);
     }
 
     public static void AddDirector(int movieId, int directorId, String directorName){
