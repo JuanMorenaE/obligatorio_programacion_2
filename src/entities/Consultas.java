@@ -164,6 +164,39 @@ public class Consultas implements IConsultas {
 
     @Override
     public void Top10PeliculasConMejorCalificacionMedia() {
+        PriorityQueue<Pelicula> peliculasConsult= new PriorityQueue<>();
+
+        for(HashItem<Integer,Pelicula> item: peliculas.getHashmap()) {
+            if (item == null) {
+                continue;
+            }
+            Pelicula pelicula = item.getValue();
+            if (pelicula.getCantidadCalificaciones() < 100) {
+                continue;
+            }
+            double calificacion = pelicula.getCalificacion();
+            if (peliculasConsult.isEmpty()) {
+                peliculasConsult.enqueueWithPriority(pelicula, calificacion);
+                continue;
+            }
+            if (peliculasConsult.size() < 10) {
+                peliculasConsult.enqueueWithPriority(pelicula, calificacion);
+                continue;
+
+            }
+            if (peliculasConsult.getLast().getCalificacion() < calificacion ) {
+                peliculasConsult.enqueueWithPriority(pelicula, calificacion);
+                peliculasConsult.removeLast();
+            }
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Pelicula pelicula = peliculasConsult.dequeue();
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCalificacion()+", "+pelicula.getOriginal_language());
+
+        }
+
+
 
     }
 

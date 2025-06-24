@@ -82,6 +82,12 @@ public class Main {
                     break;
 
                 case 2:
+                    long startTime2 = System.nanoTime();
+                    Consultas consultas2 = new Consultas();
+                    consultas2.Top10PeliculasConMejorCalificacionMedia();
+                    double estimatedTime2 = (double) (System.nanoTime() - startTime2) / 1_000_000_000;
+
+                    System.out.println("\n\tConsulta exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime2) + " seconds.");
                     break;
 
                 case 3:

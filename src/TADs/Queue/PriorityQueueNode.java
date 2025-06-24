@@ -3,14 +3,14 @@ package TADs.Queue;
 public class PriorityQueueNode<T>{
     T value;
     PriorityQueueNode<T> next;
-    int priority;
+    double priority;
 
-    public PriorityQueueNode(T value, int priority){
+    public PriorityQueueNode(T value, double priority){
         this.value = value;
         this.priority = priority;
     }
 
-    public int getPriority(){
+    public double getPriority(){
         return this.priority;
     }
 

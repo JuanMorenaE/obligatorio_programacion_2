@@ -9,7 +9,7 @@ public class PriorityQueue<T> implements MyPriorityQueue<T> {
 
     public PriorityQueue(){}
 
-    public void enqueueWithPriority(T element, int prioridad) {
+    public void enqueueWithPriority(T element, double prioridad) {
         PriorityQueueNode<T> node = new PriorityQueueNode<>(element, prioridad);
 
         if(size == 0)

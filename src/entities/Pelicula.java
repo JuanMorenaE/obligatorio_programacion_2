@@ -57,11 +57,11 @@ public class Pelicula implements Comparable<Pelicula>{
     public int getCollectionId() {return collectionId;}
     public String getCollectionName() {return collectionName;}
 
-    public void agregarCalificacion(float calificacion, LocalDate fecha) {
+    public void agregarCalificacion(float calificacion1, LocalDate fecha) {
 
         //promedio calificaciones
         cantidadCalificaciones++;
-        this.calificacion = (this.calificacion * cantidadCalificaciones + calificacion)/ cantidadCalificaciones;
+        this.calificacion = (this.calificacion * (cantidadCalificaciones-1) + calificacion1)/ cantidadCalificaciones;
 
         //Sumo una califacion al mes
 
