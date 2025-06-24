@@ -1,7 +1,10 @@
 import entities.UMovie;
 import utils.Files;
+import entities.Consultas;
 
 import java.util.Scanner;
+
+import static entities.UMovie.peliculas;
 
 public class Main {
     public static void main(String[] args){
@@ -70,6 +73,12 @@ public class Main {
             int option = sc.nextInt();
             switch(option){
                 case 1:
+                    long startTime = System.nanoTime();
+                    Consultas consultas = new Consultas();
+                    consultas.Top5PeliculasPorIdiomaMasCalificadas();
+                    double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+
+                    System.out.println("\n\tConsulta exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime) + " seconds.");
                     break;
 
                 case 2:
