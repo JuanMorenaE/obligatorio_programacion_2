@@ -64,6 +64,39 @@ public class PriorityQueue<T> implements MyPriorityQueue<T> {
         return value;
     }
 
+    public T removeLast(){
+        PriorityQueueNode<T> current= first;
+        if (size == 1){
+            T value = first.value;
+            first = null;
+            last = null;
+            size--;
+            return value;
+        }
+
+        for (int i = 0; i < size-1; i++) {
+            current= current.getNext();
+        }
+        PriorityQueueNode<T> next = current.getNext();
+        T value = next.value;
+        current.setNext(null);
+        last = current;
+        size--;
+
+        return value;
+    }
+    public T getFirst(){
+        return first.value;
+    }
+    public T getLast(){
+        return last.value;
+    }
+    public int size(){
+        return size;
+    }
+
+
+
     public boolean isEmpty() {
         return size == 0;
     }
