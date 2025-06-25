@@ -167,7 +167,7 @@ public class Files {
                 float rating = Float.parseFloat(line[2]);
 
                 long timestamp = Long.parseLong(line[3]);
-                LocalDate date = Instant.ofEpochMilli(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate date = Instant.ofEpochSecond(timestamp).atZone(ZoneId.systemDefault()).toLocalDate();
 
                 DataBuilder.AddRating(userId, movieId, rating, date);
                 ratings++;

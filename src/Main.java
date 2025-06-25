@@ -96,12 +96,30 @@ public class Main {
                     break;
 
                 case 3:
+                    long startTime3 = System.nanoTime();
+                    Consultas consultas3 = new Consultas();
+                    consultas3.Top5ColeccionesConMasIngresos();
+                    double estimatedTime3 = (double) (System.nanoTime() - startTime3) / 1_000_000_000;
+
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime3) + " seconds.");
                     break;
 
                 case 4:
+                    long startTime4 = System.nanoTime();
+                    Consultas consultas4 = new Consultas();
+                    consultas4.Top10DirectoresMejorCalificados();
+                    double estimatedTime4 = (double) (System.nanoTime() - startTime4) / 1_000_000_000;
+
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime4) + " seconds.");
                     break;
 
                 case 5:
+                    long startTime5 = System.nanoTime();
+                    Consultas consultas5 = new Consultas();
+                    consultas5.ActorMasCalificadoPorMes();
+                    double estimatedTime5 = (double) (System.nanoTime() - startTime5) / 1_000_000_000;
+
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime5) + " seconds.");
                     break;
 
                 case 6:

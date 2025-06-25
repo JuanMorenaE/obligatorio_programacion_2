@@ -3,7 +3,7 @@ package entities;
 public class Director implements Comparable<Director> {
     private int id;
     private String nombre;
-    private int calificaciones;
+    private double calificaciones;
     private int cantidadCalificaciones;
     private int cantidadPeliculas;
 
@@ -23,9 +23,9 @@ public class Director implements Comparable<Director> {
     public String getNombre() {
         return nombre;
     }
-    public void agregarCalificacion(float calificacion) {
+    public void agregarCalificacion(double calificacion1) {
         cantidadCalificaciones++;
-        calificacion = (calificaciones*cantidadCalificaciones + calificacion)/cantidadCalificaciones;
+        this.calificaciones = (this.calificaciones * (cantidadCalificaciones-1) + calificacion1)/ cantidadCalificaciones;
     }
 
     public int getCantidadCalificaciones() {
@@ -44,7 +44,7 @@ public class Director implements Comparable<Director> {
         this.nombre = nombre;
     }
 
-    public int getCalificaciones() {
+    public double getCalificaciones() {
         return calificaciones;
     }
 
