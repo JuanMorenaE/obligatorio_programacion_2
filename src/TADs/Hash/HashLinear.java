@@ -1,6 +1,13 @@
 package TADs.Hash;
 
+import TADs.LinkedList.LinkedList;
+import TADs.LinkedList.MyLinkedList;
 import TADs.exceptions.ElementoYaExisteException;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> implements HashTable<K, T>{
     final float LOAD_THRESHOLD = 0.75f;
@@ -108,6 +115,17 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
 
     public HashItem<K, T>[] getHashmap() {
         return hashmap;
+    }
+
+    public List<T> getValues() {
+        List<T> values = new ArrayList<>();
+
+        int position = 0;
+        for (HashItem<K, T> item : hashmap)
+            if (item != null)
+                values.add(item.getValue());
+
+        return values;
     }
 
     public void setHashmap(HashItem<K, T>[] hashmap) {

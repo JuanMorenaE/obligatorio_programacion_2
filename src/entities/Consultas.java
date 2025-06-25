@@ -4,8 +4,6 @@ import TADs.Hash.*;
 import TADs.Queue.PriorityQueue;
 import interfaces.IConsultas;
 
-import java.util.ArrayList;
-
 import static entities.UMovie.peliculas;
 
 public class Consultas implements IConsultas {
@@ -31,129 +29,66 @@ public class Consultas implements IConsultas {
 //        }
 
 
-        PriorityQueue<Pelicula> peliculasConsultesp = new PriorityQueue<>();
-        PriorityQueue<Pelicula> peliculasConsulting = new PriorityQueue<>();
-        PriorityQueue<Pelicula> peliculasConsultfra = new PriorityQueue<>();
-        PriorityQueue<Pelicula> peliculasConsultita = new PriorityQueue<>();
-        PriorityQueue<Pelicula> peliculasConsultpor = new PriorityQueue<>();
+        PriorityQueue<Pelicula> peliculasConsultesp = new PriorityQueue<>(5);
+        PriorityQueue<Pelicula> peliculasConsulting = new PriorityQueue<>(5);
+        PriorityQueue<Pelicula> peliculasConsultfra = new PriorityQueue<>(5);
+        PriorityQueue<Pelicula> peliculasConsultita = new PriorityQueue<>(5);
+        PriorityQueue<Pelicula> peliculasConsultpor = new PriorityQueue<>(5);
 
-        for(HashItem<Integer,Pelicula> item: peliculas.getHashmap()){
-            if(item == null){continue;}
-            Pelicula pelicula = item.getValue();
-            String idioma= pelicula.getOriginal_language();
+        for(Pelicula pelicula: peliculas.getValues()){
+            String idioma = pelicula.getOriginalLanguage();
+
             switch(idioma) {
                 case "en":
-                    if (peliculasConsulting.isEmpty()) {
-                        peliculasConsulting.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-                    }
-                    if (peliculasConsulting.size() < 5) {
-                        peliculasConsulting.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-
-                    }
-                    if (peliculasConsulting.getLast().getCantidadCalificaciones() < pelicula.getCantidadCalificaciones()) {
-                        peliculasConsulting.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        peliculasConsulting.removeLast();
-                        continue;
-                    }
+                    peliculasConsulting.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
                     break;
 
                 case "es":
-                    if (peliculasConsultesp.isEmpty()) {
-                        peliculasConsultesp.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-                    }
-                    if (peliculasConsultesp.size() < 5) {
-                        peliculasConsultesp.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-
-                    }
-                    if (peliculasConsultesp.getLast().getCantidadCalificaciones() < pelicula.getCantidadCalificaciones()) {
-                        peliculasConsultesp.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        peliculasConsultesp.removeLast();
-                        continue;
-                    }
+                    peliculasConsultesp.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
                     break;
+
                 case "fr":
-                    if (peliculasConsultfra.isEmpty()) {
-                        peliculasConsultfra.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-                    }
-                    if (peliculasConsultfra.size() < 5) {
-                        peliculasConsultfra.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-
-                    }
-                    if (peliculasConsultfra.getLast().getCantidadCalificaciones() < pelicula.getCantidadCalificaciones()) {
-                        peliculasConsultfra.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        peliculasConsultfra.removeLast();
-                        continue;
-                    }
+                    peliculasConsultfra.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
                     break;
+
                 case "it":
-                    if (peliculasConsultita.isEmpty()) {
-                        peliculasConsultita.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-                    }
-                    if (peliculasConsultita.size() < 5) {
-                        peliculasConsultita.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-
-                    }
-                    if (peliculasConsultita.getLast().getCantidadCalificaciones() < pelicula.getCantidadCalificaciones()) {
-                        peliculasConsultita.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        peliculasConsultita.removeLast();
-                        continue;
-                    }
+                    peliculasConsultita.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
                     break;
-                case "pt":
-                    if (peliculasConsultpor.isEmpty()) {
-                        peliculasConsultpor.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
-                    }
-                    if (peliculasConsultpor.size() < 5) {
-                        peliculasConsultpor.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        continue;
 
-                    }
-                    if (peliculasConsultpor.getLast().getCantidadCalificaciones() < pelicula.getCantidadCalificaciones()) {
-                        peliculasConsultpor.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
-                        peliculasConsultpor.removeLast();
-                        continue;
-                    }
+                case "pt":
+                    peliculasConsultpor.enqueueWithPriority(pelicula, pelicula.getCantidadCalificaciones());
                     break;
 
             }
         }
         //Print Ingles
-        System.out.println("Ingles");
+        System.out.println("\nIngles");
         for (int i = 0; i < 5; i++) {
             Pelicula pelicula = peliculasConsulting.dequeue();
-            System.out.println(pelicula.getId() + ", " + pelicula.getOriginal_title() + ", " + pelicula.getCantidadCalificaciones() + ", " + pelicula.getOriginal_language());
+            System.out.println(pelicula.getId() + ", " + pelicula.getOriginalTitle() + ", " + pelicula.getCantidadCalificaciones() + ", " + pelicula.getOriginalLanguage());
         }
-        System.out.println("Esp");
+        System.out.println("\nEspañol");
         for (int i = 0; i < 5; i++) {
             Pelicula pelicula = peliculasConsultesp.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginal_language());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginalLanguage());
 
         }
-        System.out.println("fre");
+        System.out.println("\nFrances");
         for (int i = 0; i < 5; i++) {
             Pelicula pelicula = peliculasConsultfra.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginal_language());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginalLanguage());
 
         }
-        System.out.println("it");
+        System.out.println("\nItaliano");
         for (int i = 0; i < 5; i++) {
             Pelicula pelicula = peliculasConsultita.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginal_language());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginalLanguage());
 
         }
-        System.out.println("por");
+        System.out.println("\nPortugues");
         for (int i = 0; i < 5; i++) {
             Pelicula pelicula = peliculasConsultpor.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginal_language());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCantidadCalificaciones()+", "+pelicula.getOriginalLanguage());
 
         }
 
@@ -164,26 +99,24 @@ public class Consultas implements IConsultas {
 
     @Override
     public void Top10PeliculasConMejorCalificacionMedia() {
-        PriorityQueue<Pelicula> peliculasConsult= new PriorityQueue<>();
+        PriorityQueue<Pelicula> peliculasConsult = new PriorityQueue<>();
 
-        for(HashItem<Integer,Pelicula> item: peliculas.getHashmap()) {
-            if (item == null) {
+        for(Pelicula pelicula: peliculas.getValues()) {
+            if (pelicula.getCantidadCalificaciones() < 100)
                 continue;
-            }
-            Pelicula pelicula = item.getValue();
-            if (pelicula.getCantidadCalificaciones() < 100) {
-                continue;
-            }
+
             double calificacion = pelicula.getCalificacion();
+
             if (peliculasConsult.isEmpty()) {
                 peliculasConsult.enqueueWithPriority(pelicula, calificacion);
                 continue;
             }
+
             if (peliculasConsult.size() < 10) {
                 peliculasConsult.enqueueWithPriority(pelicula, calificacion);
                 continue;
-
             }
+
             if (peliculasConsult.getLast().getCalificacion() < calificacion ) {
                 peliculasConsult.enqueueWithPriority(pelicula, calificacion);
                 peliculasConsult.removeLast();
@@ -192,12 +125,9 @@ public class Consultas implements IConsultas {
 
         for (int i = 0; i < 10; i++) {
             Pelicula pelicula = peliculasConsult.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginal_title()+", "+pelicula.getCalificacion()+", "+pelicula.getOriginal_language());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCalificacion()+", "+pelicula.getOriginalLanguage());
 
         }
-
-
-
     }
 
     @Override

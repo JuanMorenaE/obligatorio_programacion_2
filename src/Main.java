@@ -25,31 +25,36 @@ public class Main {
             );
             System.out.print("> ");
             Scanner sc = new Scanner(System.in);
-            int option = sc.nextInt();
-            switch(option){
-                case 1:
-                    long startTime = System.nanoTime();
+            try{
+                int option = sc.nextInt();
+                switch(option){
+                    case 1:
+                        long startTime = System.nanoTime();
 
-                    Files.LoadMoviesFromCSV(true);
-                    Files.LoadRatingsFromCSV(true);
-                    Files.LoadCreditsFromCSV(true);
+                        Files.LoadMoviesFromCSV(false);
+                        Files.LoadRatingsFromCSV(false);
+                        Files.LoadCreditsFromCSV(false);
 
-                    double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+                        double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
 
-                    System.out.println("\n\tCarga de datos exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime) + " seconds.");
-                    break;
+                        System.out.println("\n\tCarga de datos exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime) + " seconds.");
+                        break;
 
-                case 2:
-                    ConsultasMenu();
-                    break;
+                    case 2:
+                        ConsultasMenu();
+                        break;
 
-                case 3:
-                    exit = true;
-                    break;
+                    case 3:
+                        exit = true;
+                        break;
 
-                default:
-                    System.out.println("\n\tOpción no valida.");
+                    default:
+                        System.out.println("\n\tOpción no valida.");
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
             }
+
         }
     }
 
@@ -78,7 +83,7 @@ public class Main {
                     consultas.Top5PeliculasPorIdiomaMasCalificadas();
                     double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
 
-                    System.out.println("\n\tConsulta exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime) + " seconds.");
                     break;
 
                 case 2:
@@ -87,7 +92,7 @@ public class Main {
                     consultas2.Top10PeliculasConMejorCalificacionMedia();
                     double estimatedTime2 = (double) (System.nanoTime() - startTime2) / 1_000_000_000;
 
-                    System.out.println("\n\tConsulta exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime2) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime2) + " seconds.");
                     break;
 
                 case 3:

@@ -3,6 +3,7 @@ package TADs.Queue;
 public class PriorityQueueNode<T>{
     T value;
     PriorityQueueNode<T> next;
+    PriorityQueueNode<T> previous;
     double priority;
 
     public PriorityQueueNode(T value, double priority){
@@ -32,5 +33,13 @@ public class PriorityQueueNode<T>{
 
     public PriorityQueueNode<T> getNext(){
         return this.next;
+    }
+
+    public PriorityQueueNode<T> getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(PriorityQueueNode<T> previous) {
+        this.previous = previous;
     }
 }

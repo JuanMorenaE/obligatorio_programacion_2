@@ -10,9 +10,9 @@ public class Pelicula implements Comparable<Pelicula>{
     private int id;
     private long budget;
     private ArrayList<Integer> generos;
-    private String original_language;
-    private String original_title;
-    private LocalDate release_date;
+    private String originalLanguage;
+    private String originalTitle;
+    private LocalDate releaseDate;
     private long revenue;
     private float calificacion;
     private int cantidadCalificaciones;
@@ -27,9 +27,9 @@ public class Pelicula implements Comparable<Pelicula>{
         this.id = id;
         this.budget = budget;
         this.generos = generos;
-        this.original_language = original_language;
-        this.original_title = original_title;
-        this.release_date = release_date;
+        this.originalLanguage = original_language;
+        this.originalTitle = original_title;
+        this.releaseDate = release_date;
         this.revenue = revenue;
         this.cantidadCalificaciones = 0;
         this.calificacion = 0;
@@ -45,9 +45,9 @@ public class Pelicula implements Comparable<Pelicula>{
     public int getId() {return id;}
     public long getBudget() {return budget;}
     public ArrayList<Integer> getGeneros() {return generos;}
-    public String getOriginal_language() {return original_language;}
-    public String getOriginal_title() {return original_title;}
-    public LocalDate getRelease_date() {return release_date;}
+    public String getOriginalLanguage() {return originalLanguage;}
+    public String getOriginalTitle() {return originalTitle;}
+    public LocalDate getReleaseDate() {return releaseDate;}
     public long getRevenue() {return revenue;}
     public float getCalificacion() {return calificacion;}
     public int getCantidadCalificaciones() {return cantidadCalificaciones;}

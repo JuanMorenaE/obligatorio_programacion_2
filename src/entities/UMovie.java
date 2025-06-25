@@ -1,7 +1,6 @@
 package entities;
 
 import TADs.Hash.HashLinear;
-import TADs.LinkedList.LinkedList;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class UMovie {
             }
         }
         else{ //pelicula individual
-            collection = new Coleccion(pelicula.getId(), pelicula.getOriginal_title());
+            collection = new Coleccion(pelicula.getId(), pelicula.getOriginalTitle());
             collection.insertarPeliculas(pelicula);
             colecciones.add(pelicula.getId(), collection);
         }
@@ -55,7 +54,7 @@ public class UMovie {
             actores.add(actor.getId(), actor);
         }
 
-        Pelicula pelicula= peliculas.get(movieId);
+        Pelicula pelicula = peliculas.get(movieId);
 
         if (pelicula == null)
             return;

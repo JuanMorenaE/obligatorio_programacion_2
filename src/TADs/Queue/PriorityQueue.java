@@ -5,33 +5,57 @@ import TADs.exceptions.EmptyQueueException;
 public class PriorityQueue<T> implements MyPriorityQueue<T> {
     PriorityQueueNode<T> first;
     PriorityQueueNode<T> last;
+    private Integer maxSize;
     int size;
+
+    public PriorityQueue(int maxSize){
+        this.maxSize = maxSize;
+    }
 
     public PriorityQueue(){}
 
     public void enqueueWithPriority(T element, double prioridad) {
         PriorityQueueNode<T> node = new PriorityQueueNode<>(element, prioridad);
 
-        if(size == 0)
+        if(size == 0){
             first = last = node;
-        else{
-            if(first.priority < prioridad){
-                node.setNext(first);
-                first = node;
-            }else{
-                PriorityQueueNode<T> currentNode = first;
-                while(currentNode.getNext() != null && currentNode.getNext().priority >= prioridad)
-                    currentNode = currentNode.getNext();
-
-                if(currentNode.getNext() == null)
-                    currentNode.setNext(node);
-                else{
-                    node.setNext(currentNode.getNext());
-                    currentNode.setNext(node);
-                }
-            }
+            size++;
+            return;
         }
-        System.out.println("Added: '" + element + "' with priority: " + prioridad);
+
+        if(maxSize != null && size == maxSize){
+            if(prioridad <= last.priority)
+                return;
+
+            if(size == 1){
+                first = last = null;
+            }else{
+                last.getPrevious().setNext(null);
+                last = last.getPrevious();
+            }
+            size--;
+        }
+
+        if(first.priority < prioridad){
+            node.setNext(first);
+            first.setPrevious(node);
+            first = node;
+        }else{
+            PriorityQueueNode<T> currentNode = first;
+            while(currentNode.getNext() != null && currentNode.getNext().priority >= prioridad)
+                currentNode = currentNode.getNext();
+
+            node.setNext(currentNode.getNext());
+            node.setPrevious(currentNode);
+
+            if(currentNode.getNext() == null)
+                last = node;
+            else
+                currentNode.getNext().setPrevious(node);
+
+            currentNode.setNext(node);
+        }
+
         size++;
     }
 
