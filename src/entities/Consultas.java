@@ -4,30 +4,13 @@ import TADs.Hash.*;
 import TADs.Queue.PriorityQueue;
 import interfaces.IConsultas;
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
+
 
 import static entities.UMovie.*;
 
 public class Consultas implements IConsultas {
     @Override
     public void Top5PeliculasPorIdiomaMasCalificadas() {
-
-//        for(HashItem<Integer,Coleccion> hashPelicula: UMovie.colecciones.getHashmap()){
-//            Pelicula pelicula = hashPelicula.getValue();
-//            String idioma= pelicula.getOriginal_language();
-//
-//            long ingresos= c.getIngresos();
-//            peliculas.add(p.getId(), p);
-//            if(tres.getSize()>=10){
-//                if (ingresos> tres.get(9).getIngresos()){
-//                    tres.addInOrder(c);
-//                }
-//            }
-//            else {
-//                tres.addInOrder(c);
-//            }
-//        }
-
 
         PriorityQueue<Pelicula> peliculasConsultesp = new PriorityQueue<>(5);
         PriorityQueue<Pelicula> peliculasConsulting = new PriorityQueue<>(5);
@@ -114,7 +97,7 @@ public class Consultas implements IConsultas {
         System.out.println();
         for (int i = 0; i < 10; i++) {
             Pelicula pelicula = peliculasConsult.dequeue();
-            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCalificacion()+", "+pelicula.getOriginalLanguage());
+            System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCalificacion());
 
         }
     }
