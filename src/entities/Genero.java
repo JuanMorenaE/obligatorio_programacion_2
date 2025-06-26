@@ -12,7 +12,9 @@ public class Genero implements Comparable<Genero> {
         this.visitas = 0;
     }
 
-    public void agregarVisita(){visitas++;}
+    public void agregarVisita() {
+        visitas++;
+    }
 
     public int getId() {
         return id;

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import static entities.UMovie.*;
 
 public class Consultas implements IConsultas {
-
-
     @Override
     public void Top5PeliculasPorIdiomaMasCalificadas() {
 
@@ -113,6 +111,7 @@ public class Consultas implements IConsultas {
 
         }
 
+        System.out.println();
         for (int i = 0; i < 10; i++) {
             Pelicula pelicula = peliculasConsult.dequeue();
             System.out.println(pelicula.getId()+", "+pelicula.getOriginalTitle()+", "+pelicula.getCalificacion()+", "+pelicula.getOriginalLanguage());
@@ -127,14 +126,12 @@ public class Consultas implements IConsultas {
             long ingresos = coleccion.getIngresos();
             coleccionesConsult.enqueueWithPriority(coleccion, ingresos);
         }
+
+        System.out.println();
         for (int i = 0; i < 5; i++) {
-            Coleccion coleccion= coleccionesConsult.dequeue();
-            System.out.println(coleccion.getId()+", "+coleccion.getNombre()+", "+coleccion.getCantidadPeliculas()+", "+coleccion.getPeliculas()+", "+ coleccion.getIngresos());
-
+            Coleccion coleccion = coleccionesConsult.dequeue();
+            System.out.println(coleccion.getId() + ", " + coleccion.getNombre() + ", " + coleccion.getCantidadPeliculas() + ", " + coleccion + ", " + coleccion.getIngresos());
         }
-
-
-
     }
 
     @Override
@@ -146,11 +143,12 @@ public class Consultas implements IConsultas {
                 directoresConsult.enqueueWithPriority(director, calificacion);
             }
         }
+
+        System.out.println();
         for (int i = 0; i < 10; i++) {
             Director director= directoresConsult.dequeue();
-            System.out.println(director.getId()+" "+director.getCantidadPeliculas()+" "+director.getCalificaciones());
+            System.out.println(director.getId() + ", " + director.getCantidadPeliculas() + ", " + director.getCalificaciones());
         }
-
     }
 
     @Override
@@ -163,24 +161,45 @@ public class Consultas implements IConsultas {
                 }
             }
         }
+
+        System.out.println();
         for (int i = 0; i < 12; i++) {
             Actor actor = actoresConsult[1];
-            String mes= new DateFormatSymbols().getMonths()[i];
-            System.out.println(mes+" "+actor.getNombre()+" "+actor.getPeliculasMes()[i]+ " "+actor.getCalificacionesMes()[i]);
+            String mes = new DateFormatSymbols().getMonths()[i];
+            System.out.println(mes + ", " + actor.getNombre() + ", " + actor.getPeliculasMes()[i] + ", " + actor.getCalificacionesMes()[i]);
         }
-
     }
 
     @Override
     public void UsuariosConMasCalificacionesTop10Generos() {
-        PriorityQueue<Genero> top10GenerosConsult = top10Generos();
-        for (Usuario usuario: usuarios.getValues()){
+        PriorityQueue<Genero> topGeneros = Top10Generos();
+        HashLinear<Integer, PriorityQueue<Usuario>> usuariosPorGenero = new HashLinear<>(topGeneros.size());
+
+        while(!topGeneros.isEmpty()){
+            Genero genero = topGeneros.dequeue();
+            usuariosPorGenero.add(genero.getId(), new PriorityQueue<>(1));
         }
 
+        for (Usuario usuario: usuarios.getValues()){
+            for (HashItem<Integer, Integer> item : usuario.getGenerosCalificados().getValueKeys()){
+                PriorityQueue<Usuario> queue = usuariosPorGenero.get(item.getKey());
 
+                if(queue != null)
+                    queue.enqueueWithPriority(usuario, item.getValue());
+            }
+        }
+
+        System.out.println();
+        for (HashItem<Integer, PriorityQueue<Usuario>> item : usuariosPorGenero.getValueKeys()){
+            if(item != null){
+                Usuario usuario = item.getValue().dequeue();
+                Genero genero = generos.get(item.getKey());
+                System.out.println(usuario.getId() + ", " + genero.getNombre() + ", " + usuario.getGenerosCalificados().get(genero.getId()));
+            }
+        }
     }
 
-    public PriorityQueue<Genero> top10Generos() {
+    public PriorityQueue<Genero> Top10Generos() {
         PriorityQueue<Genero> generosConsult = new PriorityQueue<>(10);
         for(Genero genero: generos.getValues()){
             int visita= genero.getVisitas();

@@ -17,12 +17,6 @@ public class PriorityQueue<T> implements MyPriorityQueue<T> {
     public void enqueueWithPriority(T element, double prioridad) {
         PriorityQueueNode<T> node = new PriorityQueueNode<>(element, prioridad);
 
-        if(size == 0){
-            first = last = node;
-            size++;
-            return;
-        }
-
         if(maxSize != null && size == maxSize){
             if(prioridad <= last.priority)
                 return;
@@ -34,6 +28,12 @@ public class PriorityQueue<T> implements MyPriorityQueue<T> {
                 last = last.getPrevious();
             }
             size--;
+        }
+
+        if(size == 0){
+            first = last = node;
+            size++;
+            return;
         }
 
         if(first.priority < prioridad){

@@ -35,9 +35,9 @@ public class Main {
                         Files.LoadRatingsFromCSV(false);
                         Files.LoadCreditsFromCSV(false);
 
-                        double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+                        int estimatedTime = (int)(System.nanoTime() - startTime) / 1_000_000;
 
-                        System.out.println("\n\tCarga de datos exitosa, tiempo de ejecución de la carga: " + String.format("%.2f", estimatedTime) + " seconds.");
+                        System.out.println("\n\tCarga de datos exitosa, tiempo de ejecución de la carga: " + estimatedTime + " ms.");
                         break;
 
                     case 2:
@@ -59,6 +59,7 @@ public class Main {
     }
 
     public static void ConsultasMenu(){
+        Consultas consultas = new Consultas();
         boolean exit = false;
         while(!exit){
             System.out.println(
@@ -79,50 +80,50 @@ public class Main {
             switch(option){
                 case 1:
                     long startTime = System.nanoTime();
-                    Consultas consultas = new Consultas();
                     consultas.Top5PeliculasPorIdiomaMasCalificadas();
-                    double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
+                    int estimatedTime = (int) (System.nanoTime() - startTime) / 1_000_000;
 
-                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime + " ms.");
                     break;
 
                 case 2:
                     long startTime2 = System.nanoTime();
-                    Consultas consultas2 = new Consultas();
-                    consultas2.Top10PeliculasConMejorCalificacionMedia();
-                    double estimatedTime2 = (double) (System.nanoTime() - startTime2) / 1_000_000_000;
+                    consultas.Top10PeliculasConMejorCalificacionMedia();
+                    int estimatedTime2 = (int) (System.nanoTime() - startTime2) / 1_000_000;
 
-                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime2) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime2 + " ms.");
                     break;
 
                 case 3:
                     long startTime3 = System.nanoTime();
-                    Consultas consultas3 = new Consultas();
-                    consultas3.Top5ColeccionesConMasIngresos();
-                    double estimatedTime3 = (double) (System.nanoTime() - startTime3) / 1_000_000_000;
+                    consultas.Top5ColeccionesConMasIngresos();
+                    int estimatedTime3 = (int) (System.nanoTime() - startTime3) / 1_000_000;
 
-                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime3) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime3 + " ms.");
                     break;
 
                 case 4:
                     long startTime4 = System.nanoTime();
-                    Consultas consultas4 = new Consultas();
-                    consultas4.Top10DirectoresMejorCalificados();
-                    double estimatedTime4 = (double) (System.nanoTime() - startTime4) / 1_000_000_000;
+                    consultas.Top10DirectoresMejorCalificados();
+                    int estimatedTime4 = (int) (System.nanoTime() - startTime4) / 1_000_000;
 
-                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime4) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime4 + " ms.");
                     break;
 
                 case 5:
                     long startTime5 = System.nanoTime();
-                    Consultas consultas5 = new Consultas();
-                    consultas5.ActorMasCalificadoPorMes();
-                    double estimatedTime5 = (double) (System.nanoTime() - startTime5) / 1_000_000_000;
+                    consultas.ActorMasCalificadoPorMes();
+                    int estimatedTime5 = (int) (System.nanoTime() - startTime5) / 1_000_000;
 
-                    System.out.println("\n\tTiempo de ejecución de la consulta: " + String.format("%.2f", estimatedTime5) + " seconds.");
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime5 + " ms.");
                     break;
 
                 case 6:
+                    long startTime6 = System.nanoTime();
+                    consultas.UsuariosConMasCalificacionesTop10Generos();
+                    int estimatedTime6 = (int) (System.nanoTime() - startTime6) / 1_000_000;
+
+                    System.out.println("\n\tTiempo de ejecución de la consulta: " + estimatedTime6 + " ms.");
                     break;
 
                 case 7:

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> implements HashTable<K, T>{
+public class HashLinear<K extends Comparable<K>,  T> implements HashTable<K, T>{
     final float LOAD_THRESHOLD = 0.75f;
 
     private HashItem<K, T>[] hashmap;
@@ -91,6 +91,24 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
         return null;
     }
 
+
+    public void replace(K key, T newValue){
+        int hash = getHashCode(key);
+
+        if(hashmap[hash] == null)
+            return;
+
+        if(hashmap[hash].getKey().equals(key))
+            hashmap[hash].setValue(newValue);
+
+        int j = 1;
+        while((hash + j) % hashmap.length != hash && hashmap[(hash + j) % hashmap.length] != null){
+            if(hashmap[(hash + j) % hashmap.length].getKey().equals(key))
+                hashmap[(hash + j) % hashmap.length].setValue(newValue);
+            j++;
+        }
+    }
+
     @Override
     public void remove(K key) {
         int hash = getHashCode(key);
@@ -117,19 +135,28 @@ public class HashLinear<K extends Comparable<K>,  T extends Comparable<T>> imple
         return hashmap;
     }
 
+    public void setHashmap(HashItem<K, T>[] hashmap) {
+        this.hashmap = hashmap;
+    }
+
+    public List<HashItem<K, T>> getValueKeys() {
+        List<HashItem<K, T>> values = new ArrayList<>();
+
+        for(HashItem<K, T> item : hashmap){
+            if(item != null)
+                values.add(item);
+        }
+        return values;
+    }
+
     public List<T> getValues() {
         List<T> values = new ArrayList<>();
 
-        int position = 0;
         for (HashItem<K, T> item : hashmap)
             if (item != null)
                 values.add(item.getValue());
 
         return values;
-    }
-
-    public void setHashmap(HashItem<K, T>[] hashmap) {
-        this.hashmap = hashmap;
     }
 
     private void restructureHash(){

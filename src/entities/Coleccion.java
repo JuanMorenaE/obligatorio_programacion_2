@@ -69,4 +69,18 @@ public class Coleccion implements Comparable<Coleccion> {
     public int compareTo(Coleccion o) {
         return Long.compare(getIngresos(), o.getIngresos());
     }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+
+        string.append("[");
+
+        for (int i = 0; i < peliculas.getSize() - 1; i++)
+            string.append(peliculas.get(i).getId()).append(", ");
+
+        string.append(peliculas.get(peliculas.getSize() - 1).getId()).append("]");
+
+        return string.toString();
+    }
 }

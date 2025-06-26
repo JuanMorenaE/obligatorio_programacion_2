@@ -101,16 +101,17 @@ public class UMovie {
         pelicula.agregarCalificacion(rating.getRating(), rating.getDate());
         ArrayList<Integer> generosPelicula = pelicula.getGeneros();
 
-        for (int i = 0; i < generosPelicula.size(); i++) {
-            Integer generoid = generosPelicula.get(i);
-            Genero genero = generos.get(generoid);
-            if(usuario.getGeneroVisto(genero.getId()) == null){
-                genero.setVisitas(0);
-                usuario.agregarGenero(genero);
-            }
-            usuario.agregarVisita(genero.getId());
-            Genero generoGeneral = buscarGenero(genero.getId());
-            generoGeneral.agregarVisita();
+        for (Integer idGenero : generosPelicula) {
+            Genero genero = generos.get(idGenero);
+
+            Integer visitasUsuario = usuario.getGenerosCalificados().get(genero.getId());
+
+            if(visitasUsuario == null)
+                usuario.getGenerosCalificados().add(genero.getId(), 1);
+            else
+                usuario.getGenerosCalificados().replace(genero.getId(), visitasUsuario + 1);
+
+            genero.agregarVisita();
         }
     }
 

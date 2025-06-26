@@ -33,7 +33,7 @@ public class Files {
             long startTime = 0;
             if(debugLogs){
                 startTime = System.nanoTime();
-                System.out.println("\n[ 🕑 ] Starting LoadMoviesFromCSV() process.");
+                System.out.println("\n[ 🕑 ] Empezando proceso LoadMoviesFromCSV()...");
             }
 
             while((line = csv.readNext()) != null){
@@ -87,11 +87,11 @@ public class Files {
 
             if(debugLogs){
                 double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
-                System.out.println("[ ✅ ] Finish LoadMoviesFromCSV() process in: " + String.format("%.2f", estimatedTime) + " seconds. \n[ -> ] Total movies: " + movies);
+                System.out.println("[ ✅ ] Finalizado el proceso LoadMoviesFromCSV() en: " + String.format("%.2f", estimatedTime) + " segundos. \n[ -> ] Total peliculas: " + movies);
             }
         }
         catch (Exception ex){
-            System.out.println("[ ❌ ] Error occurred in LoadMoviesFromCSV() : " + ex + " at line " + currentLine);
+            System.out.println("[ ❌ ] Error ocurrido en LoadMoviesFromCSV() : " + ex + " en la linea " + currentLine);
         }
     }
 
@@ -105,7 +105,7 @@ public class Files {
             long startTime = 0;
             if(debugLogs){
                 startTime = System.nanoTime();
-                System.out.println("\n[ 🕑 ] Starting LoadCreditsFromCSV() process...");
+                System.out.println("\n[ 🕑 ] Empezando proceso LoadCreditsFromCSV()...");
             }
 
             while((line = csv.readNext()) != null){
@@ -137,11 +137,11 @@ public class Files {
 
             if(debugLogs){
                 double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
-                System.out.println("[ ✅ ] Finish LoadCreditsFromCSV() process in " + String.format("%.2f", estimatedTime) + " seconds. \n[ -> ] Total credits: " + currentLine);
+                System.out.println("[ ✅ ] Finalizado el proceso LoadCreditsFromCSV() en: " + String.format("%.2f", estimatedTime) + " segundos. \n[ -> ] Total calificaciones: " + currentLine);
             }
         }
         catch (Exception ex){
-            System.out.println("[ ❌ ] Error occurred in LoadCreditsFromCSV() : " + ex + " at line " + currentLine);
+            System.out.println("[ ❌ ] Error ocurrido en LoadCreditsFromCSV() : " + ex + " en la linea " + currentLine);
         }
     }
 
@@ -156,7 +156,7 @@ public class Files {
             long startTime = 0;
             if(debugLogs){
                 startTime = System.nanoTime();
-                System.out.println("\n[ 🕑 ] Starting LoadRatingsFromCSV() process...");
+                System.out.println("\n[ 🕑 ] Empezando proceso LoadRatingsFromCSV()...");
             }
 
             while((line = csv.readNext()) != null){
@@ -175,11 +175,11 @@ public class Files {
 
             if(debugLogs){
                 double estimatedTime = (double) (System.nanoTime() - startTime) / 1_000_000_000;
-                System.out.println("[ ✅ ] Finish LoadRatingsFromCSV() process in " + String.format("%.2f", estimatedTime) + " seconds. \n[ -> ] Total ratings: " + ratings);
+                System.out.println("[ ✅ ] Finalizado el proceso LoadRatingsFromCSV() en: " + String.format("%.2f", estimatedTime) + " segundos. \n[ -> ] Total ratings: " + ratings);
             }
         }
         catch (Exception ex){
-            System.out.println("[ ❌ ] Error occurred in LoadRatingsFromCSV() : " + ex + " at line " + currentLine);
+            System.out.println("[ ❌ ] Error ocurrido en LoadRatingsFromCSV() : " + ex + " en la linea " + currentLine);
         }
     }
 }

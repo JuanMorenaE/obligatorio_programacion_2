@@ -1,6 +1,6 @@
 package TADs.Hash;
 
-public class HashItem<K extends Comparable<K>, T extends Comparable<T>> implements Comparable<HashItem<K, T>> {
+public class HashItem<K extends Comparable<K>, T> implements Comparable<HashItem<K, T>> {
     private K key;
     private T value;
 

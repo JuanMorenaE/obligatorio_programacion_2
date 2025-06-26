@@ -41,22 +41,6 @@ public class Pelicula implements Comparable<Pelicula>{
 
     }
 
-
-    public int getId() {return id;}
-    public long getBudget() {return budget;}
-    public ArrayList<Integer> getGeneros() {return generos;}
-    public String getOriginalLanguage() {return originalLanguage;}
-    public String getOriginalTitle() {return originalTitle;}
-    public LocalDate getReleaseDate() {return releaseDate;}
-    public long getRevenue() {return revenue;}
-    public float getCalificacion() {return calificacion;}
-    public int getCantidadCalificaciones() {return cantidadCalificaciones;}
-    public Director getDirector() {return director;}
-    public LinkedList<Actor> getActores() {return actores;}
-    public int[] getCalificacionesMes() {return calificacionesMes;}
-    public int getCollectionId() {return collectionId;}
-    public String getCollectionName() {return collectionName;}
-
     public void agregarCalificacion(float calificacion1, LocalDate fecha) {
 
         //promedio calificaciones
@@ -92,6 +76,114 @@ public class Pelicula implements Comparable<Pelicula>{
         setDirector(directorNew);
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public long getBudget() {
+        return budget;
+    }
+
+    public void setBudget(long budget) {
+        this.budget = budget;
+    }
+
+    public ArrayList<Integer> getGeneros() {
+        return generos;
+    }
+
+    public void setGeneros(ArrayList<Integer> generos) {
+        this.generos = generos;
+    }
+
+    public String getOriginalLanguage() {
+        return originalLanguage;
+    }
+
+    public void setOriginalLanguage(String originalLanguage) {
+        this.originalLanguage = originalLanguage;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
+    }
+
+    public float getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(float calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public int getCantidadCalificaciones() {
+        return cantidadCalificaciones;
+    }
+
+    public void setCantidadCalificaciones(int cantidadCalificaciones) {
+        this.cantidadCalificaciones = cantidadCalificaciones;
+    }
+
+    public Director getDirector() {
+        return director;
+    }
+
+    public LinkedList<Actor> getActores() {
+        return actores;
+    }
+
+    public void setActores(LinkedList<Actor> actores) {
+        this.actores = actores;
+    }
+
+    public int[] getCalificacionesMes() {
+        return calificacionesMes;
+    }
+
+    public void setCalificacionesMes(int[] calificacionesMes) {
+        this.calificacionesMes = calificacionesMes;
+    }
+
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
 
     @Override
     public int compareTo(Pelicula o) {
